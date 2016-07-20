@@ -17,12 +17,10 @@ const app = (
   </Router>
 )
 
-jQuery(function() {
-  ReactDOM.render(
-    app,
-    document.getElementById('search-box'),
-    function() {
-      console.timeEnd('react-app')
-    }
-  );
-})
+ReactDOM.render(
+  app,
+  document.getElementById('search-box'),
+  function() {
+    console.timeEnd('react-app')
+  }
+);
