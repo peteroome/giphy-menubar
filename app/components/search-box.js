@@ -31,7 +31,6 @@ export default class SearchBox extends React.Component {
     var totalScrolled = scrollT + inHeight;
 
     if(totalScrolled + 100 > windowHeight){ //user reached at bottom
-      console.log(windowHeight, inHeight, scrollT, totalScrolled);
       if(!this.state.loadingFlag && this.state.searchTerm){ //to avoid multiple request
         this.setState({
           loadingFlag: true,
@@ -48,19 +47,18 @@ export default class SearchBox extends React.Component {
 
   render() {
     const gifs = this._getGifs();
+
     return(
       <div className="row gifs-container">
         <div className="cell">
           <div className="search-box">
             <SearchForm fetchGifs={this._fetchGifs} />
-
             <div className="gif-list">
               {gifs}
             </div>
           </div>
         </div>
       </div>
-
     );
   }
 
@@ -72,27 +70,34 @@ export default class SearchBox extends React.Component {
     });
   }
 
-  _fetchGifs(searchTerm) {
+  _fetchGifs(query) {
     this.setState({
-      searchTerm: searchTerm,
-    });
+      searchTerm: query
+    }, () => {
+      let queryUrl = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
 
-    let queryUrl = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
-
-    if(searchTerm && searchTerm.length > 0) {
-      queryUrl = `http://api.giphy.com/v1/gifs/search?q=${this.state.searchTerm}&offset=${this.state.offset}&api_key=dc6zaTOxFJmzC`;
-    }
-    console.log(queryUrl);
-
-    jQuery.ajax({
-      method: 'GET',
-      url: queryUrl,
-      success: (gifs) => {
-        this.setState({
-          gifs: this.state.gifs.concat(gifs.data),
-          loadingFlag: false,
-        })
+      if(query && query.length > 0) {
+        queryUrl = `http://api.giphy.com/v1/gifs/search?q=${this.state.searchTerm}&offset=${this.state.offset}&api_key=dc6zaTOxFJmzC`;
       }
+
+      jQuery.ajax({
+        method: 'GET',
+        url: queryUrl,
+        success: (gifs) => {
+          let gifsArray = [];
+
+          if (this.state.offset === 0 || gifs.data.length > 0) {
+            gifsArray = gifs.data
+          } else {
+            gifsArray = this.state.gifs.concat(gifs.data)
+          }
+
+          this.setState({
+            gifs: gifsArray,
+            loadingFlag: false,
+          })
+        }
+      });
     });
   }
 

@@ -10,9 +10,8 @@ export default class Gif extends React.Component {
   }
 
   render() {
-    let image = this.props.images.fixed_height;
-    console.log(this.props);
-    let divStyle = {
+    const image = this.props.images.fixed_height_downsampled;
+    const divStyle = {
       width: `${image.width} px`,
       height: `${image.height} px`
     }
@@ -33,8 +32,9 @@ export default class Gif extends React.Component {
 
   _handleClick(e) {
     e.preventDefault();
-    console.log("Click", this.props.url);
     clipboard.writeText(this.props.url);
-    new Notification('Gif URL copied 🎉');
+    new Notification('Giphy!', {
+      body: 'URL copied 🎉'
+    });
   }
 }
