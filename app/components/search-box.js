@@ -20,25 +20,8 @@ export default class SearchBox extends React.Component {
 
     this._fetchGifs = this._fetchGifs.bind(this);
     this._handleScroll = this._handleScroll.bind(this);
+
     window.addEventListener("scroll", this._handleScroll);
-  }
-
-  _handleScroll() {
-    // this function will be triggered if user scrolls
-    var windowHeight = $("body").height();
-    var inHeight = window.innerHeight;
-    var scrollT = $("body").scrollTop();
-    var totalScrolled = scrollT + inHeight;
-
-    if(totalScrolled + 100 > windowHeight){ //user reached at bottom
-      if(!this.state.loadingFlag && this.state.searchTerm){ //to avoid multiple request
-        this.setState({
-          loadingFlag: true,
-          offset: this.state.offset + 25,
-        });
-        this._fetchGifs(this.state.searchTerm);
-      }
-    }
   }
 
   componentWillMount() {
@@ -86,10 +69,12 @@ export default class SearchBox extends React.Component {
         success: (gifs) => {
           let gifsArray = [];
 
-          if (this.state.offset === 0 || gifs.data.length > 0) {
-            gifsArray = gifs.data
+          if (gifs.data.length == 0) {
+            gifsArray = this.state.gifs;
+          } else if (this.state.offset === 0) {
+            gifsArray = gifs.data;
           } else {
-            gifsArray = this.state.gifs.concat(gifs.data)
+            gifsArray = this.state.gifs.concat(gifs.data);
           }
 
           this.setState({
@@ -99,6 +84,24 @@ export default class SearchBox extends React.Component {
         }
       });
     });
+  }
+
+  _handleScroll() {
+    // this function will be triggered if user scrolls
+    var windowHeight = $("body").height();
+    var inHeight = window.innerHeight;
+    var scrollT = $("body").scrollTop();
+    var totalScrolled = scrollT + inHeight;
+
+    if(totalScrolled + 100 > windowHeight){ //user reached at bottom
+      if(!this.state.loadingFlag && this.state.searchTerm){ //to avoid multiple request
+        this.setState({
+          loadingFlag: true,
+          offset: this.state.offset + 25,
+        });
+        this._fetchGifs(this.state.searchTerm);
+      }
+    }
   }
 
 }

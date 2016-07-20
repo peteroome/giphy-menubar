@@ -6,7 +6,13 @@ export default class Gif extends React.Component {
   constructor() {
     super();
 
+    this.state = {
+      hd: false
+    };
+
     this._handleClick = this._handleClick.bind(this);
+    this._handleMouseOver = this._handleMouseOver.bind(this);
+    this._handleMouseOut = this._handleMouseOut.bind(this);
   }
 
   render() {
@@ -24,6 +30,8 @@ export default class Gif extends React.Component {
             height={image.height}
             src={image.url}
             alt={this.props.caption}
+            onMouseOver={this._handleMouseOver}
+            onMouseOut={this._handleMouseOut}
           />
         </a>
       </div>
@@ -32,9 +40,35 @@ export default class Gif extends React.Component {
 
   _handleClick(e) {
     e.preventDefault();
-    clipboard.writeText(this.props.url);
+    clipboard.writeText(this.props.images.original.url);
     new Notification('Giphy!', {
       body: 'URL copied 🎉'
     });
+  }
+
+  _handleMouseOver(e){
+    const imageHD = this.props.images.fixed_height;
+    const imageSD = this.props.images.fixed_height_downsampled;
+    const img = e.currentTarget;
+
+    if (!this.state.hd) {
+      img.src = imageHD.url;
+      this.setState({
+        hd: true
+      })
+    }
+  }
+
+  _handleMouseOut(e){
+    const imageHD = this.props.images.fixed_height;
+    const imageSD = this.props.images.fixed_height_downsampled;
+    const img = e.currentTarget;
+
+    if (this.state.hd) {
+      img.src = imageSD.url;
+      this.setState({
+        hd: false
+      })
+    }
   }
 }
