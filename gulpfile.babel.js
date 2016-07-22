@@ -44,9 +44,9 @@ gulp.task('default', ['transpile']);
 gulp.task('transpile', ['lint'], () => bundle());
 
 gulp.task('lint', () => {
-    return gulp.src(['app/**/*.js', 'gulpfile.babel.js'])
-      .pipe(eslint())
-      .pipe(eslint.format())
+  return gulp.src(['app/**/*.js', 'gulpfile.babel.js'])
+    .pipe(eslint())
+    .pipe(eslint.format())
 });
 
 gulp.task('serve', ['transpile'], () => sync.init({ server: 'public' }))
