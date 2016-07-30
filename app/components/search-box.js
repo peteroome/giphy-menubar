@@ -8,7 +8,6 @@ import Footer from './footer';
 import Gif from './gif';
 
 export default class SearchBox extends React.Component {
-
   constructor() {
     super();
 
@@ -82,9 +81,9 @@ export default class SearchBox extends React.Component {
         success: (gifs) => {
           let gifsArray = [];
 
-          if (gifs.data.length == 0) {
+          if (gifs.data.length === 0) {
             gifsArray = this.state.gifs;
-          } else if (this.state.offset === 0) {
+          } else if (!this.state.searchTerm || this.state.offset === 0) {
             gifsArray = gifs.data;
           } else {
             gifsArray = this.state.gifs.concat(gifs.data);
@@ -94,6 +93,8 @@ export default class SearchBox extends React.Component {
             gifs: gifsArray,
             loadingFlag: false,
           })
+
+          console.log("Data: ", gifs.data.length, " TotalGifs: ", this.state.gifs.length);
         }
       });
     });

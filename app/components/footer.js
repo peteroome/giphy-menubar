@@ -28,5 +28,6 @@ export default class Footer extends React.Component {
     event.preventDefault();
     this.props.fetchGifs();
     this.props.clearSearch();
+    window.scrollTo(0, 0);
   }
 }
