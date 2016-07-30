@@ -54,6 +54,6 @@ gulp.task('js-watch', ['transpile'], () => sync.reload());
 
 gulp.task('watch', ['serve'], () => {
   gulp.watch('app/**/*', ['js-watch'])
-  gulp.watch('public/assets/style.css', sync.reload)
+  gulp.watch('public/**/*.css', sync.reload)
   gulp.watch('public/index.html', sync.reload)
 })

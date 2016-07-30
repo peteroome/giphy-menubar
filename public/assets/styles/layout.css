@@ -1,0 +1,32 @@
+body {
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+  background: #000;
+}
+
+.fixed-content {
+  padding: 10px 10px;
+  background: #000;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: calc(100% - 20px);
+}
+
+h1 {
+  color: white;
+}
+
+p {
+  font-size: 75%;
+  color: hsla(360, 100%, 100%, 0.5);
+}
+
+a {
+  color: hsla(360, 100%, 100%, 1);
+}
+
+a:hover {
+  color: rgba(248,74,89,1);
+}

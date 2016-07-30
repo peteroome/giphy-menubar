@@ -1,0 +1,22 @@
+.gif-list-container {
+  margin: 0 auto;
+  padding: 10px 10px;
+  width: 600px;
+}
+
+.gif-list {
+ -webkit-column-count: 3;
+ -webkit-column-gap: 0;
+ width: 600px;
+}
+
+.gif-list img {
+ display: inline-block;
+ margin-bottom: 0px;
+ width: 100%;
+ vertical-align: middle;
+}
+
+.gif-list img:hover {
+  cursor: pointer;
+}

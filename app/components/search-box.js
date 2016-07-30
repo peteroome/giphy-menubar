@@ -4,6 +4,7 @@ import jQuery from 'jquery';
 const $ = jQuery;
 
 import SearchForm from './search-form';
+import Footer from './footer';
 import Gif from './gif';
 
 export default class SearchBox extends React.Component {
@@ -18,8 +19,10 @@ export default class SearchBox extends React.Component {
       searchTerm: ''
     };
 
+    this._setSearchTerm = this._setSearchTerm.bind(this);
     this._fetchGifs = this._fetchGifs.bind(this);
     this._handleScroll = this._handleScroll.bind(this);
+    this._clearSearch = this._clearSearch.bind(this);
 
     window.addEventListener("scroll", this._handleScroll);
   }
@@ -32,14 +35,18 @@ export default class SearchBox extends React.Component {
     const gifs = this._getGifs();
 
     return(
-      <div className="row gifs-container">
-        <div className="cell">
-          <div className="search-box">
-            <SearchForm fetchGifs={this._fetchGifs} />
-            <div className="gif-list">
-              {gifs}
-            </div>
-          </div>
+      <div className="gifs-container">
+        <div className="fixed-content">
+          <SearchForm
+            onUpdate={this._setSearchTerm}
+            currentSearchTerm={this.state.searchTerm}
+            fetchGifs={this._fetchGifs} />
+          <Footer fetchGifs={this._fetchGifs} clearSearch={this._clearSearch} />
+        </div>
+        <div className="gif-list-container">
+          <ul className="gif-list">
+            {gifs}
+          </ul>
         </div>
       </div>
     );
@@ -50,6 +57,12 @@ export default class SearchBox extends React.Component {
       return <Gif
                {...gif}
                key={gif.id} />
+    });
+  }
+
+  _setSearchTerm(query) {
+    this.setState({
+      searchTerm: query
     });
   }
 
@@ -104,4 +117,9 @@ export default class SearchBox extends React.Component {
     }
   }
 
+  _clearSearch() {
+    this.setState({
+      searchTerm: ''
+    });
+  }
 }

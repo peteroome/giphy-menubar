@@ -16,25 +16,20 @@ export default class Gif extends React.Component {
   }
 
   render() {
-    const image = this.props.images.fixed_height_downsampled;
-    const divStyle = {
-      width: `${image.width} px`,
-      height: `${image.height} px`
-    }
+    const image = this.props.images.fixed_width_downsampled;
 
     return(
-      <div className="gif" style={divStyle}>
-        <a target="_blank" href="#" onClick={this._handleClick}>
-          <img
-            width={image.width}
-            height={image.height}
-            src={image.url}
-            alt={this.props.caption}
-            onMouseOver={this._handleMouseOver}
-            onMouseOut={this._handleMouseOut}
-          />
-        </a>
-      </div>
+      <li className="gif">
+        <img
+          width={image.width}
+          height={image.height}
+          src={image.url}
+          alt={this.props.caption}
+          onMouseOver={this._handleMouseOver}
+          onMouseOut={this._handleMouseOut}
+          onClick={this._handleClick}
+        />
+      </li>
     );
   }
 
@@ -47,8 +42,8 @@ export default class Gif extends React.Component {
   }
 
   _handleMouseOver(e){
-    const imageHD = this.props.images.fixed_height;
-    const imageSD = this.props.images.fixed_height_downsampled;
+    const imageHD = this.props.images.fixed_width;
+    const imageSD = this.props.images.fixed_width_downsampled;
     const img = e.currentTarget;
 
     if (!this.state.hd) {
@@ -60,8 +55,8 @@ export default class Gif extends React.Component {
   }
 
   _handleMouseOut(e){
-    const imageHD = this.props.images.fixed_height;
-    const imageSD = this.props.images.fixed_height_downsampled;
+    const imageHD = this.props.images.fixed_width;
+    const imageSD = this.props.images.fixed_width_downsampled;
     const img = e.currentTarget;
 
     if (this.state.hd) {

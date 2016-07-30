@@ -1,0 +1,13 @@
+.left-side,
+.right-side {
+  display: inline-block;
+  width: 50%;
+}
+
+.left-side p {
+  text-align: left;
+}
+
+.right-side p {
+  text-align: right;
+}
