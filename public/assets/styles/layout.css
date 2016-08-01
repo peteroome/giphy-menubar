@@ -1,8 +1,42 @@
+.arrow-box {
+  position: relative;
+  background: none;
+  border-top: 10px solid rgba(0, 0, 0, 0);
+}
+
+.arrow-box:after {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.arrow-box:after {
+  border-color: rgba(0, 0, 0, 0);
+  border-bottom-color: #000;
+  border-width: 10px;
+  margin-left: -10px;
+}
+
+#search-box {
+  position: fixed;
+  overflow: scroll;
+  height: 100%;
+  top: 10px;
+  background: #000;
+  border-top: 10px solid #000;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
 body {
   font-family: sans-serif;
   padding: 0;
   margin: 0;
-  background: #000;
 }
 
 .fixed-content {

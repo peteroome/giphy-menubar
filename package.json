@@ -4,7 +4,8 @@
   "description": "A minimal Giphy Menubar application",
   "main": "main.js",
   "scripts": {
-    "start": "electron main.js",
+    "build": "electron-packager . Example --platform=darwin --arch=x64 --version=0.36.0 --icon=Icon.icns",
+    "start": "electron .",
     "watch": "watchify app/app.js -t babelify -o public/assets/js/bundle.js --debug --verbose"
   },
   "author": "Pete Roome <pete.roome@gmail.com> (http://peteroome.com/)",
@@ -29,6 +30,7 @@
     "babelify": "^7.2.0",
     "browser-sync": "^2.11.2",
     "browserify": "^12.0.1",
+    "electron-packager": "^5.1.0",
     "electron-prebuilt": "^0.36.0",
     "electron-reload": "^0.2.0",
     "eslint": "^2.7.0",
@@ -46,5 +48,7 @@
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.7.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "menubar": "*"
+  }
 }

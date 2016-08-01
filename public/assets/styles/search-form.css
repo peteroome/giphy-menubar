@@ -21,4 +21,5 @@ input {
 button {
   width: 10%;
   background: -webkit-linear-gradient(45deg, rgba(138,0,248,1) 0%, rgba(248,74,89,1) 100%); /* safari5.1+, chrome10+ */
+  padding: 2px 0 0 3px;
 }
