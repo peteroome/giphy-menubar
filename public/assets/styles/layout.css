@@ -1,7 +1,8 @@
 .arrow-box {
   position: relative;
-  background: none;
+  background: rgba(0, 0, 0, 0);
   border-top: 10px solid rgba(0, 0, 0, 0);
+  overflow: hidden;
 }
 
 .arrow-box:after {
@@ -13,9 +14,6 @@
   width: 0;
   position: absolute;
   pointer-events: none;
-}
-
-.arrow-box:after {
   border-color: rgba(0, 0, 0, 0);
   border-bottom-color: #000;
   border-width: 10px;
@@ -26,14 +24,16 @@
   position: fixed;
   overflow: scroll;
   height: 100%;
-  top: 10px;
   background: #000;
   border-top: 10px solid #000;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+  padding: 0 10px 0;
+  border-bottom: 10px solid #000;
 }
 
 body {
+  height: 600px;
   font-family: sans-serif;
   padding: 0;
   margin: 0;

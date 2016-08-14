@@ -14,7 +14,7 @@ let menu = menubar({
   transparent: true,
   frame: false,
   icon: path.join(__dirname, 'public/assets/images', 'Icon.png'),
-  y: 20
+  y: 26
 })
 
 menu.on('ready', function ready(){

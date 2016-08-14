@@ -5,6 +5,7 @@ const $ = jQuery;
 
 import SearchForm from './search-form';
 import Footer from './footer';
+import SearchResults from './search-results';
 import Gif from './gif';
 
 export default class SearchBox extends React.Component {
@@ -19,11 +20,13 @@ export default class SearchBox extends React.Component {
     };
 
     this._setSearchTerm = this._setSearchTerm.bind(this);
+    this._newSearch = this._newSearch.bind(this);
     this._fetchGifs = this._fetchGifs.bind(this);
     this._handleScroll = this._handleScroll.bind(this);
     this._clearSearch = this._clearSearch.bind(this);
 
-    window.addEventListener("scroll", this._handleScroll);
+    // window.addEventListener("scroll", this._handleScroll);
+    document.getElementById('search-box').addEventListener("scroll", this._handleScroll);
   }
 
   componentWillMount() {
@@ -31,7 +34,8 @@ export default class SearchBox extends React.Component {
   }
 
   render() {
-    const gifs = this._getGifs();
+    let gifs = this._getGifs();
+    // console.log(this.state.gifs.length);
 
     return(
       <div className="gifs-container">
@@ -39,14 +43,10 @@ export default class SearchBox extends React.Component {
           <SearchForm
             onUpdate={this._setSearchTerm}
             currentSearchTerm={this.state.searchTerm}
-            fetchGifs={this._fetchGifs} />
+            newSearch={this._newSearch} />
           <Footer fetchGifs={this._fetchGifs} clearSearch={this._clearSearch} />
         </div>
-        <div className="gif-list-container">
-          <ul className="gif-list">
-            {gifs}
-          </ul>
-        </div>
+        <SearchResults gifs={gifs} />
       </div>
     );
   }
@@ -65,13 +65,21 @@ export default class SearchBox extends React.Component {
     });
   }
 
-  _fetchGifs(query) {
+  _newSearch(query) {
     this.setState({
-      searchTerm: query
+      searchTerm: query,
+      offset: 0
     }, () => {
+      this._fetchGifs()
+    });
+  }
+
+  _fetchGifs() {
+    // Don't pound the API if we didn't get any results.woof
+    if(this.state.lastResultsCount !== 0){
       let queryUrl = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
 
-      if(query && query.length > 0) {
+      if(this.state.searchTerm && this.state.searchTerm.length > 0) {
         queryUrl = `http://api.giphy.com/v1/gifs/search?q=${this.state.searchTerm}&offset=${this.state.offset}&api_key=dc6zaTOxFJmzC`;
       }
 
@@ -92,19 +100,18 @@ export default class SearchBox extends React.Component {
           this.setState({
             gifs: gifsArray,
             loadingFlag: false,
+            lastResultsCount: gifs.data.length
           })
-
-          console.log("Data: ", gifs.data.length, " TotalGifs: ", this.state.gifs.length);
         }
       });
-    });
+    }
   }
 
   _handleScroll() {
     // this function will be triggered if user scrolls
-    var windowHeight = $("body").height();
+    var windowHeight = $("#search-box").height();
     var inHeight = window.innerHeight;
-    var scrollT = $("body").scrollTop();
+    var scrollT = $("#search-box").scrollTop();
     var totalScrolled = scrollT + inHeight;
 
     if(totalScrolled + 100 > windowHeight){ //user reached at bottom
@@ -113,7 +120,7 @@ export default class SearchBox extends React.Component {
           loadingFlag: true,
           offset: this.state.offset + 25,
         });
-        this._fetchGifs(this.state.searchTerm);
+        this._fetchGifs();
       }
     }
   }

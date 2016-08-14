@@ -1,20 +1,17 @@
 .gif-list-container {
-  margin: 0 auto 66px;
-  padding: 0 10px 10px;
-  width: 400px;
+  margin-bottom: 66px;
 }
 
 .gif-list {
- -webkit-column-count: 2;
- -webkit-column-gap: 0;
- width: 400px;
+  -webkit-column-count: 2;
+  -webkit-column-gap: 0;
 }
 
 .gif-list img {
- display: inline-block;
- margin-bottom: 0px;
- width: 100%;
- vertical-align: middle;
+  display: inline-block;
+  margin-bottom: 0px;
+  width: 100%;
+  vertical-align: middle;
 }
 
 .gif-list img:hover {
