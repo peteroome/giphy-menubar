@@ -42,6 +42,7 @@ export default class SearchForm extends React.Component {
 
   _handleSubmit(event) {
     event.preventDefault();
+    console.log("Submit");
     this.props.newSearch(this._search.value);
   }
 
