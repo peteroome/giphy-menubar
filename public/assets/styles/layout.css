@@ -67,6 +67,6 @@ a:hover {
 }
 
 /* Hide the scrollbar */
-::-webkit-scrollbar {
+#search-box::-webkit-scrollbar {
   width: 0;
 }

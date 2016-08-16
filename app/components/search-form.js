@@ -31,18 +31,15 @@ export default class SearchForm extends React.Component {
   }
 
   componentDidMount(){
-    // Autofocus the input
-    this._search.focus()
+    this._search.focus();
   }
 
   componentDidUpdate(){
-    // Autofocus the input
-    this._search.focus()
+    this._search.focus();
   }
 
   _handleSubmit(event) {
     event.preventDefault();
-    console.log("Submit");
     this.props.newSearch(this._search.value);
   }
 

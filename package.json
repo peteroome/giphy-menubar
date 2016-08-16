@@ -43,7 +43,6 @@
     "jquery": "^2.2.3",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
-    "react-masonry-component": "*",
     "react-router": "^2.2.2",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0",

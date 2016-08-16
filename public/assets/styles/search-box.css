@@ -1,13 +1,28 @@
 .gif-list-container {
   width: 400px;
   z-index: 0;
+  display: inline-block;
 }
 
 .gif-list {
   margin-bottom: 66px;
   z-index: 0;
+  width: 50%;
 }
 
+.gif-list.left {
+  float: left;
+}
+
+.gif-list.right {
+  float: right;
+}
+
+.gif-list li,
 .gif-list img:hover {
   cursor: pointer;
+}
+
+.gif-list img {
+  display: block;
 }
