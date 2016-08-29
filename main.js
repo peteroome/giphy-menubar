@@ -1,11 +1,15 @@
 'use strict';
+require('dotenv').config();
 
 let path = require('path')
-
 require('electron-reload')(__dirname);
+
+// Analytics
+let heap = require('heap-api')(process.env.HEAP_APP_ID);
 
 // Menubar
 const menubar = require('menubar')
+
 let menu = menubar({
   tooltip: "Search Giphy?",
   width: 420,

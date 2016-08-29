@@ -5,6 +5,10 @@ export default class SearchResults extends React.Component {
     super();
   }
 
+  // componentDidMount(){
+  //   document.getElementById("search-box").scrollTop = 0;
+  // }
+
   render() {
     let oddGifs  = [];
     let evenGifs = [];

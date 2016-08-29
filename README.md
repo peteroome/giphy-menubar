@@ -11,3 +11,7 @@ https://github.com/maxogden/menubar
 `npm run start`
 
 `npm run watch`
+
+
+## To implement
+https://heapanalytics.com/

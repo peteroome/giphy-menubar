@@ -2,11 +2,11 @@
   "name": "giphy-menubar",
   "version": "0.0.1",
   "description": "A minimal Giphy Menubar application",
-  "main": "main.js",
+  "main": "bootstrapper.js",
   "scripts": {
     "build": "electron-packager . Example --platform=darwin --arch=x64 --version=0.36.0 --icon=Icon.icns",
     "start": "electron .",
-    "watch": "watchify app/app.js -t babelify -o public/assets/js/bundle.js --debug --verbose"
+    "watch": "watchify ./public/assets/js/main.js -t babelify -o public/assets/js/bundle.js --debug --verbose"
   },
   "author": "Pete Roome <pete.roome@gmail.com> (http://peteroome.com/)",
   "license": "ISC",
@@ -49,6 +49,8 @@
     "watchify": "^3.7.0"
   },
   "dependencies": {
-    "menubar": "*"
+    "menubar": "*",
+    "dotenv": "^2.0.0",
+    "heap-api": "^1.0.1"
   }
 }

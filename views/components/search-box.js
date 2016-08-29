@@ -35,7 +35,6 @@ export default class SearchBox extends React.Component {
 
   render() {
     let gifs = this._getGifs();
-    // console.log(this.state.gifs.length);
 
     return(
       <div className="gifs-container">
@@ -70,7 +69,7 @@ export default class SearchBox extends React.Component {
       searchTerm: query,
       offset: 0
     }, () => {
-      this._fetchGifs()
+      this._fetchGifs();
     });
   }
 

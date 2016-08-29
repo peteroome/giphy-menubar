@@ -1,4 +1,7 @@
 import React from 'react';
+import ReactDom from 'react-dom';
+import jQuery from 'jquery';
+const $ = jQuery;
 
 export default class SearchForm extends React.Component {
   constructor() {
