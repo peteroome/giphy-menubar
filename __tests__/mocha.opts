@@ -1,0 +1,4 @@
+--require should
+--require ./test/setup
+
+/test/**/*.spec.js

@@ -108,9 +108,10 @@ export default class SearchBox extends React.Component {
 
   _handleScroll() {
     // this function will be triggered if user scrolls
-    var windowHeight = $("#search-box").height();
+    var searchBox = document.getElementById('search-box');
+    var windowHeight = searchBox.offsetHeight;
+    var scrollT = searchBox.scrollTop;
     var inHeight = window.innerHeight;
-    var scrollT = $("#search-box").scrollTop();
     var totalScrolled = scrollT + inHeight;
 
     if(totalScrolled + 100 > windowHeight){ //user reached at bottom

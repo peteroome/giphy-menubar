@@ -17,7 +17,7 @@ export default class App extends React.Component {
   _isOnline() {
     if (navigator.onLine) {
       return(
-        <SearchBox ref="searchBox" />
+        <SearchBox />
       );
     } else {
       return(
@@ -26,5 +26,3 @@ export default class App extends React.Component {
     }
   }
 }
-
-export default App;
