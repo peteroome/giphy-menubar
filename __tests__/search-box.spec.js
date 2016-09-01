@@ -1,12 +1,14 @@
-jest.unmock('../views/components/search-box');
-
 import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+import ReactDom from 'react-dom';
+import ReactTestUtils from 'react-addons-test-utils';
+import { shallow, mount, render } from 'enzyme';
+
+jest.dontMock('../views/components/search-box');
+
 import SearchBox from '../views/components/search-box';
 
-describe('SearchBox', () => {
-  const searchBox = renderer.create(
+describe("Search box", () => {
+  const component = shallow(
     <SearchBox />
   );
 
@@ -17,15 +19,33 @@ describe('SearchBox', () => {
     searchTerm: ''
   };
 
-  it('sets state to a blank search by default', () => {
-    expect(searchBox.state).toEqual(defaultState);
+  it('sets a default state', () => {
+    expect(component.state()).toEqual(defaultState);
   });
 
-  // it('can fetch some gifs');
-  // it('can paginate through the giphy API');
-  // it('fetches gifs when it mounts');
-  // it('paginates on scroll');
-  // it('sets the search term');
-  // it('clears the search term');
-  // it('can do a new clean search');
+  it('contains a gif-container', () => {
+    expect(component.find('.gifs-container').length).toBe(1);
+  });
+
+  it('has a fixed-content div', () => {
+    expect(component.find('.fixed-content').length).toBe(1);
+  });
+
+  pit('clears the search term');
+
+  it('gets some gifs on componentWillMount', () => {
+    const Scomponent = ReactTestUtils.renderIntoDocument(
+      <SearchBox />
+    );
+    Scomponent.componentWillMount();
+    Scomponent._fetchGifs = jest.genMockFunction();
+    expect(Scomponent._fetchGifs).toBeCalled();
+  });
+
+  pit('can fetch some gifs');
+  pit('can paginate through the giphy API');
+  pit('fetches gifs when it mounts');
+  pit('paginates on scroll');
+  pit('sets the search term');
+  pit('can do a new clean search');
 });

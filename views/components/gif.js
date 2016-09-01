@@ -1,6 +1,7 @@
 import React from 'react';
+import remote from 'remote';
 
-const clipboard = require('remote').clipboard;
+const clipboard = remote.clipboard;
 
 export default class Gif extends React.Component {
   constructor() {

@@ -2,7 +2,10 @@
 require('dotenv').config();
 
 let path = require('path')
-require('electron-reload')(__dirname);
+
+require('electron-reload')(__dirname, {
+  electron: require('electron-prebuilt')
+});
 
 // Analytics
 let heap = require('heap-api')(process.env.HEAP_APP_ID);

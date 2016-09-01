@@ -8,9 +8,9 @@ import Footer from './footer';
 import SearchResults from './search-results';
 import Gif from './gif';
 
-export default class SearchBox extends React.Component {
-  constructor() {
-    super();
+class SearchBox extends React.Component {
+  constructor(props) {
+    super(props);
 
     this.state = {
       gifs: [],
@@ -26,7 +26,7 @@ export default class SearchBox extends React.Component {
     this._clearSearch = this._clearSearch.bind(this);
 
     // window.addEventListener("scroll", this._handleScroll);
-    document.getElementById('search-box').addEventListener("scroll", this._handleScroll);
+    // document.getElementById('search-box').addEventListener("scroll", this._handleScroll);
   }
 
   componentWillMount() {
@@ -37,12 +37,13 @@ export default class SearchBox extends React.Component {
     let gifs = this._getGifs();
 
     return(
-      <div className="gifs-container">
-        <div className="fixed-content">
+      <div className='gifs-container'>
+        <div className='fixed-content'>
           <SearchForm
             onUpdate={this._setSearchTerm}
             currentSearchTerm={this.state.searchTerm}
-            newSearch={this._newSearch} />
+            newSearch={this._newSearch}
+          />
           <Footer fetchGifs={this._fetchGifs} clearSearch={this._clearSearch} />
         </div>
         <SearchResults gifs={gifs} />
@@ -82,7 +83,7 @@ export default class SearchBox extends React.Component {
         queryUrl = `http://api.giphy.com/v1/gifs/search?q=${this.state.searchTerm}&offset=${this.state.offset}&api_key=dc6zaTOxFJmzC`;
       }
 
-      jQuery.ajax({
+      $.ajax({
         method: 'GET',
         url: queryUrl,
         success: (gifs) => {
@@ -126,8 +127,8 @@ export default class SearchBox extends React.Component {
   }
 
   _clearSearch() {
-    this.setState({
-      searchTerm: ''
-    });
+    this.setState({ searchTerm: '' });
   }
 }
+
+export default SearchBox;

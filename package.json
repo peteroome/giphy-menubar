@@ -4,7 +4,7 @@
   "description": "A minimal Giphy Menubar application",
   "main": "bootstrapper.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest -o --watch",
     "build": "electron-packager . Example --platform=darwin --arch=x64 --version=0.36.0 --icon=Icon.icns",
     "start": "electron .",
     "watch": "watchify ./public/assets/js/main.js -t babelify -o public/assets/js/bundle.js --debug --verbose"
@@ -36,6 +36,7 @@
     "electron-packager": "^5.1.0",
     "electron-prebuilt": "^0.36.0",
     "electron-reload": "^0.2.0",
+    "enzyme": "^2.2.0",
     "eslint": "^2.7.0",
     "eslint-plugin-react": "^4.2.3",
     "exorcist": "^0.4.0",
@@ -46,7 +47,7 @@
     "jest": "^14.1.0",
     "jest-cli": "^14.1.0",
     "jquery": "^2.2.3",
-    "react": "^15.2.1",
+    "react": "^15.3.1",
     "react-addons-test-utils": "^15.3.1",
     "react-dom": "^15.0.1",
     "react-router": "^2.2.2",
@@ -61,6 +62,9 @@
     "heap-api": "^1.0.1"
   },
   "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "moduleFileExtensions": ["js", "json"],
+    "testFileExtensions": ["js"],
     "automock": false,
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react/",
