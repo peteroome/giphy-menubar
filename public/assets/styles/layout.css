@@ -20,7 +20,7 @@
   margin-left: -10px;
 }
 
-#search-box {
+.search-box {
   position: fixed;
   overflow: scroll;
   height: 100%;
@@ -67,6 +67,6 @@ a:hover {
 }
 
 /* Hide the scrollbar */
-#search-box::-webkit-scrollbar {
+.search-box::-webkit-scrollbar {
   width: 0;
 }

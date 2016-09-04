@@ -1,7 +1,10 @@
 import React from 'react';
-import remote from 'remote';
-
-const clipboard = remote.clipboard;
+// const electron = window.require('electron');
+// import electron from 'electron';
+// const {remote} = require('electron')
+// const remote = electron.remote
+// const clipboard = remote.clipboard;
+// const {clipboard} = require('electron')
 
 export default class Gif extends React.Component {
   constructor() {

@@ -3,18 +3,18 @@ import SearchBox from './search-box';
 import Offline from './offline';
 
 export default class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this._isOnline = this._isOnline.bind(this);
+    this.isOnline = this.isOnline.bind(this);
   }
 
 	render() {
-    let ui = this._isOnline();
+    let ui = this.isOnline();
     return(ui);
   }
 
-  _isOnline() {
+  isOnline() {
     if (navigator.onLine) {
       return(
         <SearchBox />

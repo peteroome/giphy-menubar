@@ -16,7 +16,7 @@ const sync = browserSync.create();
 
 // Input file.
 watchify.args.debug = true;
-var bundler = browserify('app/app.js', watchify.args);
+var bundler = browserify('public/assets/js/index.js', watchify.args);
 
 // Babel transform
 bundler.transform(babelify.configure({
@@ -44,7 +44,7 @@ gulp.task('default', ['transpile']);
 gulp.task('transpile', ['lint'], () => bundle());
 
 gulp.task('lint', () => {
-  return gulp.src(['app/**/*.js', 'gulpfile.babel.js'])
+  return gulp.src(['views/**/*.js', 'gulpfile.babel.js'])
     .pipe(eslint())
     .pipe(eslint.format())
 });
@@ -53,7 +53,7 @@ gulp.task('serve', ['transpile'], () => sync.init({ server: 'public' }))
 gulp.task('js-watch', ['transpile'], () => sync.reload());
 
 gulp.task('watch', ['serve'], () => {
-  gulp.watch('app/**/*', ['js-watch'])
+  gulp.watch('views/**/*', ['js-watch'])
   gulp.watch('public/**/*.css', sync.reload)
   gulp.watch('public/index.html', sync.reload)
 })

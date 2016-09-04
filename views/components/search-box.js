@@ -19,39 +19,46 @@ class SearchBox extends React.Component {
       searchTerm: ''
     };
 
-    this._setSearchTerm = this._setSearchTerm.bind(this);
-    this._newSearch = this._newSearch.bind(this);
-    this._fetchGifs = this._fetchGifs.bind(this);
-    this._handleScroll = this._handleScroll.bind(this);
-    this._clearSearch = this._clearSearch.bind(this);
-
-    // window.addEventListener("scroll", this._handleScroll);
-    // document.getElementById('search-box').addEventListener("scroll", this._handleScroll);
+    this.setSearchTerm = this.setSearchTerm.bind(this);
+    this.newSearch = this.newSearch.bind(this);
+    this.fetchGifs = this.fetchGifs.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
 
   componentWillMount() {
-    this._fetchGifs();
+    this.fetchGifs();
+  }
+
+  componentDidMount() {
+    // let element = document.getElementsByClassName('search-box')[0]
+    // element.addEventListener("scroll", this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    // let element = document.getElementsByClassName('search-box')[0]
+    // element.removeEventListener("scroll", this.handleScroll);
   }
 
   render() {
-    let gifs = this._getGifs();
+    let gifs = this.getGifs();
 
     return(
-      <div className='gifs-container'>
+      <div className="search-box">
         <div className='fixed-content'>
           <SearchForm
-            onUpdate={this._setSearchTerm}
+            onUpdate={this.setSearchTerm}
             currentSearchTerm={this.state.searchTerm}
-            newSearch={this._newSearch}
+            newSearch={this.newSearch}
           />
-          <Footer fetchGifs={this._fetchGifs} clearSearch={this._clearSearch} />
+          <Footer fetchGifs={this.fetchGifs} clearSearch={this.clearSearch} />
         </div>
         <SearchResults gifs={gifs} />
       </div>
     );
   }
 
-  _getGifs() {
+  getGifs() {
     return this.state.gifs.map((gif) => {
       return <Gif
                {...gif}
@@ -59,29 +66,36 @@ class SearchBox extends React.Component {
     });
   }
 
-  _setSearchTerm(query) {
+  setSearchTerm(query) {
     this.setState({
       searchTerm: query
     });
   }
 
-  _newSearch(query) {
+  newSearch(query) {
     this.setState({
       searchTerm: query,
       offset: 0
     }, () => {
-      this._fetchGifs();
+      this.fetchGifs();
     });
   }
 
-  _fetchGifs() {
-    // Don't pound the API if we didn't get any results.woof
+  fetchGifs() {
+    // Don't pound the API if we didn't get any results.
     if(this.state.lastResultsCount !== 0){
-      let queryUrl = "http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC";
+      let queryUrl = process.env.GIPHY_URL
+      let queryPath = '/trending'
+      let queryData = $.param({ 'api_key': process.env.GIPHY_API_KEY })
 
       if(this.state.searchTerm && this.state.searchTerm.length > 0) {
-        queryUrl = `http://api.giphy.com/v1/gifs/search?q=${this.state.searchTerm}&offset=${this.state.offset}&api_key=dc6zaTOxFJmzC`;
+        queryPath = `/search`;
+        $.merge(queryData, {
+          'q': this.state.searchTerm,
+          'offset': this.state.offset
+        })
       }
+      queryUrl = queryUrl + queryPath + "?" + queryData
 
       $.ajax({
         method: 'GET',
@@ -107,9 +121,10 @@ class SearchBox extends React.Component {
     }
   }
 
-  _handleScroll() {
+  handleScroll() {
+    console.log("Scrolling");
     // this function will be triggered if user scrolls
-    var searchBox = document.getElementById('search-box');
+    var searchBox = document.getElementsByClassName('search-box')[0];
     var windowHeight = searchBox.offsetHeight;
     var scrollT = searchBox.scrollTop;
     var inHeight = window.innerHeight;
@@ -121,12 +136,12 @@ class SearchBox extends React.Component {
           loadingFlag: true,
           offset: this.state.offset + 25,
         });
-        this._fetchGifs();
+        this.fetchGifs();
       }
     }
   }
 
-  _clearSearch() {
+  clearSearch() {
     this.setState({ searchTerm: '' });
   }
 }

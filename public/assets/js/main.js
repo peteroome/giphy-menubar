@@ -14,8 +14,7 @@ import App from '../../../views/components/app';
 
 ReactDOM.render(
   <App />,
-  document.getElementById('search-box'),
-  function() {
+  document.getElementById('app-container'), () => {
     console.timeEnd('react-app')
   }
 );
