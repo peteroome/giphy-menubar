@@ -7,22 +7,29 @@ export default class App extends React.Component {
     super(props);
 
     this.isOnline = this.isOnline.bind(this);
+    this.checkOnline = this.checkOnline.bind(this);
   }
 
 	render() {
-    let ui = this.isOnline();
-    return(ui);
-  }
-
-  isOnline() {
-    if (navigator.onLine) {
+    if (this.isOnline()) {
       return(
         <SearchBox />
       );
     } else {
       return(
-        <Offline />
+        <Offline
+          tryAgain={this.checkOnline}
+        />
       );
     }
+  }
+
+  isOnline() {
+    return navigator.onLine ? true : false;
+  }
+
+  checkOnline(event) {
+    event.preventDefault();
+    this.forceUpdate();
   }
 }

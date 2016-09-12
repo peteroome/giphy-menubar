@@ -9,7 +9,6 @@ dotenv.config();
 const heapID = process.env.HEAP_APP_ID
 
 import jQuery from 'jquery';
-import Layout from '../../../views/layout/layout'
 import App from '../../../views/components/app';
 
 ReactDOM.render(

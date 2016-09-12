@@ -33,7 +33,6 @@ class SearchBox extends React.Component {
     var scrollTop = searchBox.scrollTop;
     var inHeight = window.innerHeight;
     var totalScrolled = scrollTop + inHeight;
-    console.log(windowHeight, scrollTop, inHeight, totalScrolled);
 
     if(totalScrolled + 100 > windowHeight){ //user reached at bottom
       if(!this.state.loadingFlag && this.state.searchTerm){ //to avoid multiple request

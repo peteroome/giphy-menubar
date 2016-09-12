@@ -3,9 +3,9 @@ import ReactDom from 'react-dom';
 import jQuery from 'jquery';
 const $ = jQuery;
 
-export default class SearchForm extends React.Component {
-  constructor() {
-    super();
+class SearchForm extends React.Component {
+  constructor(props) {
+    super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -25,7 +25,7 @@ export default class SearchForm extends React.Component {
               ref={(c) => this.search = c}
               onChange={this.handleChange} />
             <button type="submit">
-              <img src="public/assets/images/icons/ic_search_black_36px.svg" alt="Search"/>
+              <img src="public/assets/images/icons/ic_search_white_36px.svg" alt="Search"/>
             </button>
           </fieldset>
         </form>
@@ -33,11 +33,11 @@ export default class SearchForm extends React.Component {
     );
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.search.focus();
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
     this.search.focus();
   }
 
@@ -51,3 +51,5 @@ export default class SearchForm extends React.Component {
     this.props.onUpdate(query);
   }
 }
+
+export default SearchForm;

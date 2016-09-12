@@ -32,6 +32,20 @@
   border-bottom: 10px solid #000;
 }
 
+.offline {
+  position: fixed;
+  overflow: scroll;
+  height: 200px;
+  width: 100%;
+  background: #000;
+  border-top: 10px solid #000;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding: 10px 10px;
+  border-bottom: 10px solid #000;
+  width: calc(100% - 20px);
+}
+
 body {
   height: 600px;
   font-family: sans-serif;
@@ -51,6 +65,8 @@ body {
 
 h1 {
   color: white;
+  font-size: 1.8em;
+  text-align: center;
 }
 
 p {

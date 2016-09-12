@@ -1,0 +1,25 @@
+.offline {
+  position: fixed;
+  height: 100%;
+  background: #000;
+  border-top: 10px solid #000;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  padding: 10px 10px;
+  border-bottom: 10px solid #000;
+  width: calc(100% - 20px);
+}
+
+.offline::-webkit-scrollbar {
+  width: 0;
+}
+
+.offline h1 {
+  margin: 50% 0 6%;
+}
+
+.offline button {
+  width: 50%;
+  margin: 0 auto;
+  display: block;
+}
