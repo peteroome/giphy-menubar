@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
 import jQuery from 'jquery';
 const $ = jQuery;
 
@@ -26,25 +26,35 @@ class SearchBox extends React.Component {
     this.clearSearch = this.clearSearch.bind(this);
   }
 
+  handleScroll(event) {
+    var searchBox = event.currentTarget;
+    // var searchBox = document.getElementsByClassName('search-box')[0];
+    var windowHeight = searchBox.offsetHeight;
+    var scrollTop = searchBox.scrollTop;
+    var inHeight = window.innerHeight;
+    var totalScrolled = scrollTop + inHeight;
+    console.log(windowHeight, scrollTop, inHeight, totalScrolled);
+
+    if(totalScrolled + 100 > windowHeight){ //user reached at bottom
+      if(!this.state.loadingFlag && this.state.searchTerm){ //to avoid multiple request
+        this.setState({
+          loadingFlag: true,
+          offset: this.state.offset + 25,
+        });
+        this.fetchGifs();
+      }
+    }
+  }
+
   componentWillMount() {
     this.fetchGifs();
-  }
-
-  componentDidMount() {
-    // let element = document.getElementsByClassName('search-box')[0]
-    // element.addEventListener("scroll", this.handleScroll);
-  }
-
-  componentWillUnmount() {
-    // let element = document.getElementsByClassName('search-box')[0]
-    // element.removeEventListener("scroll", this.handleScroll);
   }
 
   render() {
     let gifs = this.getGifs();
 
     return(
-      <div className="search-box">
+      <div className="search-box" onScroll={this.handleScroll}>
         <div className='fixed-content'>
           <SearchForm
             onUpdate={this.setSearchTerm}
@@ -86,15 +96,16 @@ class SearchBox extends React.Component {
     if(this.state.lastResultsCount !== 0){
       let queryUrl = process.env.GIPHY_URL
       let queryPath = '/trending'
-      let queryData = $.param({ 'api_key': process.env.GIPHY_API_KEY })
+      let queryData = { 'api_key': process.env.GIPHY_API_KEY }
 
       if(this.state.searchTerm && this.state.searchTerm.length > 0) {
         queryPath = `/search`;
-        $.merge(queryData, {
+        queryData = $.extend(queryData, {
           'q': this.state.searchTerm,
           'offset': this.state.offset
-        })
+        });
       }
+      queryData = $.param(queryData);
       queryUrl = queryUrl + queryPath + "?" + queryData
 
       $.ajax({
@@ -118,26 +129,6 @@ class SearchBox extends React.Component {
           })
         }
       });
-    }
-  }
-
-  handleScroll() {
-    console.log("Scrolling");
-    // this function will be triggered if user scrolls
-    var searchBox = document.getElementsByClassName('search-box')[0];
-    var windowHeight = searchBox.offsetHeight;
-    var scrollT = searchBox.scrollTop;
-    var inHeight = window.innerHeight;
-    var totalScrolled = scrollT + inHeight;
-
-    if(totalScrolled + 100 > windowHeight){ //user reached at bottom
-      if(!this.state.loadingFlag && this.state.searchTerm){ //to avoid multiple request
-        this.setState({
-          loadingFlag: true,
-          offset: this.state.offset + 25,
-        });
-        this.fetchGifs();
-      }
     }
   }
 

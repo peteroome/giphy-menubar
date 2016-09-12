@@ -4,7 +4,7 @@
   "description": "A minimal Giphy Menubar application",
   "main": "bootstrapper.js",
   "scripts": {
-    "test": "mocha --require ./test/setup.js --recursive --compilers js:babel-register test/**/*.spec.js --require chai --reporter nyan",
+    "test": "mocha --require ./test/helpers/setup.js --recursive --compilers js:babel-register test/**/*.spec.js --require chai --reporter nyan",
     "test-watch": "npm test -- --watch",
     "lint": "eslint app test *.js",
     "build": "electron-packager . Example --platform=darwin --arch=x64 --version=0.36.0 --icon=Icon.icns",
@@ -28,6 +28,7 @@
   "devDependencies": {
     "babel-core": "^6.14.0",
     "babel-eslint": "^6.1.2",
+    "babel-plugin-transform-runtime": "^6.15.0",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
     "babelify": "^7.3.0",

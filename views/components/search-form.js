@@ -7,8 +7,8 @@ export default class SearchForm extends React.Component {
   constructor() {
     super();
 
-    this._handleSubmit = this._handleSubmit.bind(this);
-    this._handleChange = this._handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   render() {
@@ -16,14 +16,14 @@ export default class SearchForm extends React.Component {
 
     return (
       <div className="form-holder">
-        <form className="search-form" onSubmit={this._handleSubmit}>
+        <form className="search-form" onSubmit={this.handleSubmit}>
           <fieldset>
             <input
               name="search"
               placeholder="Search"
               value={value}
-              ref={(c) => this._search = c}
-              onChange={this._handleChange} />
+              ref={(c) => this.search = c}
+              onChange={this.handleChange} />
             <button type="submit">
               <img src="public/assets/images/icons/ic_search_black_36px.svg" alt="Search"/>
             </button>
@@ -34,19 +34,19 @@ export default class SearchForm extends React.Component {
   }
 
   componentDidMount(){
-    this._search.focus();
+    this.search.focus();
   }
 
   componentDidUpdate(){
-    this._search.focus();
+    this.search.focus();
   }
 
-  _handleSubmit(event) {
+  handleSubmit(event) {
     event.preventDefault();
-    this.props.newSearch(this._search.value);
+    this.props.newSearch(this.search.value);
   }
 
-  _handleChange(event) {
+  handleChange(event) {
     let query = event.target.value;
     this.props.onUpdate(query);
   }
