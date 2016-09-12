@@ -1,70 +1,63 @@
 import React from 'react';
-// const electron = window.require('electron');
-// import electron from 'electron';
-// const {remote} = require('electron')
-// const remote = electron.remote
-// const clipboard = remote.clipboard;
-// const {clipboard} = require('electron')
 
 export default class Gif extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       hd: false
     };
 
-    this._handleClick = this._handleClick.bind(this);
-    this._handleMouseOver = this._handleMouseOver.bind(this);
-    this._handleMouseOut = this._handleMouseOut.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.handleMouseOver = this.handleMouseOver.bind(this);
+    this.handleMouseOut = this.handleMouseOut.bind(this);
+
+    this.image = this.props.giphyObject.images.fixed_width_downsampled;
+    this.imageHD = this.props.giphyObject.images.fixed_width;
+    this.copyUrl = this.props.giphyObject.images.original.url;
   }
 
   render() {
-    const image = this.props.images.fixed_width_downsampled;
-
     return(
       <li className="gif">
         <img
-          width={image.width}
-          height={image.height}
-          src={image.url}
-          alt={this.props.caption}
-          onMouseOver={this._handleMouseOver}
-          onMouseOut={this._handleMouseOut}
-          onClick={this._handleClick}
+          width={this.image.width}
+          height={this.image.height}
+          src={this.image.url}
+          alt={this.image.caption}
+          onMouseOver={this.handleMouseOver}
+          onMouseOut={this.handleMouseOut}
+          onClick={this.handleClick}
         />
       </li>
     );
   }
 
-  _handleClick(e) {
-    e.preventDefault();
-    clipboard.writeText(this.props.images.original.url);
+  handleClick(event) {
+    event.preventDefault();
+
+    clipboard.writeText(this.copyUrl);
     new Notification('Giphy!', {
       body: 'URL copied 🎉'
     });
   }
 
-  _handleMouseOver(e){
-    const imageHD = this.props.images.fixed_width;
-    const imageSD = this.props.images.fixed_width_downsampled;
-    const img = e.currentTarget;
+  handleMouseOver(event){
+    const img = event.currentTarget;
 
     if (!this.state.hd) {
-      img.src = imageHD.url;
+      img.src = this.imageHD.url;
       this.setState({
         hd: true
       })
     }
   }
 
-  _handleMouseOut(e){
-    const imageHD = this.props.images.fixed_width;
-    const imageSD = this.props.images.fixed_width_downsampled;
-    const img = e.currentTarget;
+  handleMouseOut(event){
+    const img = event.currentTarget;
 
     if (this.state.hd) {
-      img.src = imageSD.url;
+      img.src = this.image.url;
       this.setState({
         hd: false
       })

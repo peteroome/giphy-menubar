@@ -71,7 +71,7 @@ class SearchBox extends React.Component {
   getGifs() {
     return this.state.gifs.map((gif) => {
       return <Gif
-               {...gif}
+               giphyObject={gif}
                key={gif.id} />
     });
   }

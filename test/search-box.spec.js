@@ -1,7 +1,6 @@
 import { expect, assert } from 'chai';
 import { shallow, mount, render } from 'enzyme';
 import { spy, stub } from 'sinon';
-import jsdom from 'jsdom';;
 
 import React from 'react';
 import ReactDOM from 'react-dom';
