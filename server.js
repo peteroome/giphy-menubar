@@ -14,10 +14,10 @@ let heap = require('heap-api')(process.env.HEAP_APP_ID);
 const menubar = require('menubar')
 
 let menu = menubar({
-  tooltip: "Search Giphy?",
+  tooltip: "Search Giphy!",
   width: 420,
   height: 600,
-  alwaysOnTop: true,
+  alwaysOnTop: false,
   transparent: true,
   frame: false,
   icon: path.join(__dirname, 'public/assets/images', 'Icon.png'),
