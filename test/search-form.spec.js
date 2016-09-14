@@ -65,7 +65,7 @@ describe('SearchForm', () => {
   describe('#handleSubmit()', () => {
     it('calls handleSubmit', () => {
       spy(mountComponent.node, 'handleSubmit');
-      mountComponent.handleSubmit(event);
+      mountComponent.instance().handleSubmit(event);
 
       assert(event.preventDefault.calledOnce);
     });

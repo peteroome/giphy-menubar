@@ -98,27 +98,6 @@ describe("<SearchBox />", () => {
     });
   });
 
-  describe('#getGifs()', () => {
-    it('creates an array of Gif components', () => {
-      let gifs = [
-        {'id': 1},
-        {'id': 2},
-        {'id': 3},
-      ]
-
-      const component = shallow(<SearchBox />);
-      component.setState({gifs: gifs});
-      let getGifsResponse = component.instance().getGifs();
-      expect(getGifsResponse).to.be.an('array');
-
-      expect(getGifsResponse[0].key).to.equal('1');
-      expect(getGifsResponse[2].key).to.equal('3');
-
-      expect(getGifsResponse[0]).to.be.an('object');
-      assert.isFunction(getGifsResponse[0].type);
-    });
-  });
-
   describe('#newSearch()', () => {
     it('sets the searchTerm state to the new search', () => {
       const component = mount(<SearchBox />);

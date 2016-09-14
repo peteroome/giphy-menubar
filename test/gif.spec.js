@@ -57,10 +57,6 @@ describe("<Gif />", () => {
   });
 
   describe('#render()', () => {
-    it('contains an li.gif', () => {
-      expect(component.find('li.gif').length).to.equal(1);
-    });
-
     it('should render an img tag', () => {
       let imgTag = component.find('img')
       expect(imgTag.length).to.equal(1);

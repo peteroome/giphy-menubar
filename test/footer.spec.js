@@ -49,10 +49,10 @@ describe("<Footer />", () => {
       expect(link.prop('onClick')).to.equal(component.instance().handleClick);
     });
 
-    it('should render a Pete Roome link', () => {
+    it('should render an svg link', () => {
       var link = component.find('a.nav__pete');
       expect(link.length).to.equal(1);
-      expect(link.text()).to.equal('Pete Roome');
+      expect(link.find('svg').length).to.equal(1);
     });
   });
 
