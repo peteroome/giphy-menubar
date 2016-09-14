@@ -6,7 +6,7 @@ const $ = jQuery;
 import SearchForm from './search-form';
 import Footer from './footer';
 import SearchResults from './search-results';
-import Gif from './gif';
+// import Gif from './gif';
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -50,8 +50,6 @@ class SearchBox extends React.Component {
   }
 
   render() {
-    let gifs = this.getGifs();
-
     return(
       <div className="search-box" onScroll={this.handleScroll}>
         <div className='fixed-content'>
@@ -62,17 +60,9 @@ class SearchBox extends React.Component {
           />
           <Footer fetchGifs={this.fetchGifs} clearSearch={this.clearSearch} />
         </div>
-        <SearchResults gifs={gifs} />
+        <SearchResults gifs={this.state.gifs} />
       </div>
     );
-  }
-
-  getGifs() {
-    return this.state.gifs.map((gif) => {
-      return <Gif
-               giphyObject={gif}
-               key={gif.id} />
-    });
   }
 
   setSearchTerm(query) {
@@ -84,7 +74,8 @@ class SearchBox extends React.Component {
   newSearch(query) {
     this.setState({
       searchTerm: query,
-      offset: 0
+      offset: 0,
+      lastResultsCount: -1
     }, () => {
       this.fetchGifs();
     });

@@ -17,7 +17,7 @@ let menu = menubar({
   tooltip: "Search Giphy!",
   width: 420,
   height: 600,
-  alwaysOnTop: false,
+  alwaysOnTop: true,
   transparent: true,
   frame: false,
   icon: path.join(__dirname, 'public/assets/images', 'Icon.png'),

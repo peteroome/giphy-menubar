@@ -1,20 +1,17 @@
 import React from 'react';
+import SearchResultsLineItem from './search-results-line-item';
 
 export default class SearchResults extends React.Component {
-  constructor() {
-    super();
-  }
-
-  // componentDidMount(){
-  //   document.getElementById("search-box").scrollTop = 0;
-  // }
-
   render() {
     let oddGifs  = [];
     let evenGifs = [];
+    let gifs = this.props.gifs;
 
-    this.props.gifs.filter((gif, index) => {
-      if(index % 2 === 0){
+    // Pop the last gif so we have 24, not 25.
+    // 25 into two cols will never be equal.
+    gifs.pop();
+    gifs.filter((gif, index) => {
+      if((index + 1) % 2 === 0){
         evenGifs.push(gif);
       } else {
         oddGifs.push(gif);
@@ -23,9 +20,21 @@ export default class SearchResults extends React.Component {
 
     return(
       <div className="gif-list-container">
-        <ul className='gif-list left'>{oddGifs}</ul>
-        <ul className='gif-list right'>{evenGifs}</ul>
+        <ul className='gif-list left'>
+          {oddGifs.map((gif, index) => {
+            return(
+              <SearchResultsLineItem key={index} gif={gif} />
+            );
+          })}
+        </ul>
+        <ul className='gif-list right'>
+          {evenGifs.map((gif, index) => {
+            return(
+              <SearchResultsLineItem key={index} gif={gif} />
+            );
+          })}
+        </ul>
       </div>
-    )
+    );
   }
 }

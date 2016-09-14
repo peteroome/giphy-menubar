@@ -21,9 +21,7 @@ class SearchForm extends React.Component {
             <input
               name="search"
               placeholder="Search"
-              value={value}
-              ref={(c) => this.search = c}
-              onChange={this.handleChange} />
+              ref={(c) => this.search = c} />
             <button type="submit">
               <img src="public/assets/images/icons/ic_search_white_36px.svg" alt="Search"/>
             </button>

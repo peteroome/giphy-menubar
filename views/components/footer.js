@@ -5,7 +5,7 @@ export default class Footer extends React.Component {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
-    this.openLink = this.openLink.bind(this);
+    this.openExternalLink = this.openExternalLink.bind(this);
   }
 
   render() {
@@ -15,7 +15,7 @@ export default class Footer extends React.Component {
           <p><a className="nav__trending" onClick={this.handleClick}>#trending</a></p>
         </div>
         <div className="right-side">
-          <p>Built by <a onClick={this.openLink} className="nav__pete" href="http://peteroo.me">
+          <p>Built by <a onClick={this.openExternalLink} className="nav__pete" href="http://peteroo.me">
             <svg
               width="90px"
               height="48px"
@@ -41,7 +41,7 @@ export default class Footer extends React.Component {
     window.scrollTo(0, 0);
   }
 
-  openLink(event) {
+  openExternalLink(event) {
     event.preventDefault();
     var href = event.currentTarget.href;
     shell.openExternal(href);

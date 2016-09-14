@@ -19,17 +19,15 @@ export default class Gif extends React.Component {
 
   render() {
     return(
-      <li className="gif">
-        <img
-          width={this.image.width}
-          height={this.image.height}
-          src={this.image.url}
-          alt={this.image.caption}
-          onMouseOver={this.handleMouseOver}
-          onMouseOut={this.handleMouseOut}
-          onClick={this.handleClick}
-        />
-      </li>
+      <img
+        width={this.image.width}
+        height={this.image.height}
+        src={this.image.url}
+        alt={this.image.caption}
+        onMouseOver={this.handleMouseOver}
+        onMouseOut={this.handleMouseOut}
+        onClick={this.handleClick}
+      />
     );
   }
 
