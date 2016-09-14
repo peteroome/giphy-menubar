@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Footer extends React.Component {
+class Footer extends React.Component {
   constructor(props) {
     super(props);
 
@@ -47,3 +47,5 @@ export default class Footer extends React.Component {
     shell.openExternal(href);
   }
 }
+
+export default Footer;

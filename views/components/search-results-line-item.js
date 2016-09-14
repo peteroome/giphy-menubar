@@ -1,7 +1,7 @@
 import React from 'react';
 import Gif from './gif';
 
-export default class SearchResultsLineItem extends React.Component {
+class SearchResultsLineItem extends React.Component {
   render() {
     return(
       <li className="gif">
@@ -10,3 +10,5 @@ export default class SearchResultsLineItem extends React.Component {
     );
   }
 }
+
+export default SearchResultsLineItem;

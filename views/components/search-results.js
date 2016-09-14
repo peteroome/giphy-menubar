@@ -1,7 +1,7 @@
 import React from 'react';
 import SearchResultsLineItem from './search-results-line-item';
 
-export default class SearchResults extends React.Component {
+class SearchResults extends React.Component {
   render() {
     let oddGifs  = [];
     let evenGifs = [];
@@ -38,3 +38,5 @@ export default class SearchResults extends React.Component {
     );
   }
 }
+
+export default SearchResults;

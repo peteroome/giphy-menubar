@@ -36,5 +36,5 @@ menu.on('ready', function ready(){
 
 menu.on('after-create-window', function after(){
   console.log('after-create-window.');
-  menu.window.openDevTools()
+  menu.window.openDevTools();
 })

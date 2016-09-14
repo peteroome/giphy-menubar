@@ -2,7 +2,7 @@ import React from 'react';
 import SearchBox from './search-box';
 import Offline from './offline';
 
-export default class App extends React.Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
 
@@ -33,3 +33,5 @@ export default class App extends React.Component {
     this.forceUpdate();
   }
 }
+
+export default App;

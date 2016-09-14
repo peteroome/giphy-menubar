@@ -6,7 +6,6 @@ const $ = jQuery;
 import SearchForm from './search-form';
 import Footer from './footer';
 import SearchResults from './search-results';
-// import Gif from './gif';
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -28,7 +27,6 @@ class SearchBox extends React.Component {
 
   handleScroll(event) {
     var searchBox = event.currentTarget;
-    // var searchBox = document.getElementsByClassName('search-box')[0];
     var windowHeight = searchBox.offsetHeight;
     var scrollTop = searchBox.scrollTop;
     var inHeight = window.innerHeight;

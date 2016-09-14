@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Gif extends React.Component {
+class Gif extends React.Component {
   constructor(props) {
     super(props);
 
@@ -62,3 +62,5 @@ export default class Gif extends React.Component {
     }
   }
 }
+
+export default Gif;

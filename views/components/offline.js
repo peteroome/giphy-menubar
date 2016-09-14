@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Offline extends React.Component {
+class Offline extends React.Component {
   render() {
     return(
       <div className="offline">
@@ -13,3 +13,5 @@ export default class Offline extends React.Component {
     );
   }
 }
+
+export default Offline;
