@@ -1,6 +1,7 @@
 import React from 'react';
 import SearchBox from './search-box';
 import Offline from './offline';
+import Footer from './footer';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,13 +14,17 @@ class App extends React.Component {
 	render() {
     if (this.isOnline()) {
       return(
-        <SearchBox />
+        <div className="app">
+          <SearchBox />
+          <Footer />
+        </div>
       );
     } else {
       return(
-        <Offline
-          tryAgain={this.checkOnline}
-        />
+        <div className="app">
+          <Offline tryAgain={this.checkOnline} />
+          <Footer />
+        </div>
       );
     }
   }

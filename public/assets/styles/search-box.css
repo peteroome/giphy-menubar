@@ -1,11 +1,9 @@
 .gif-list-container {
-  width: 400px;
-  z-index: 0;
-  display: inline-block;
+  width: 100%;
+  height: 100%;
 }
 
 .gif-list {
-  margin-bottom: 66px;
   z-index: 0;
   width: 50%;
 }

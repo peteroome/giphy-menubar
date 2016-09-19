@@ -13,7 +13,7 @@ button {
 }
 
 input {
-  font-size: 1.5em;
+  font-size: 1.15em;
   padding: 10px 6px;
   width: 90%;
 }
@@ -26,4 +26,8 @@ button {
   font-size: 1em;
   color: white;
   text-transform: uppercase;
+}
+
+button img {
+  width: 28px;
 }

@@ -4,18 +4,14 @@ class Footer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.handleClick = this.handleClick.bind(this);
     this.openExternalLink = this.openExternalLink.bind(this);
   }
 
   render() {
     return (
       <footer>
-        <div className="left-side">
-          <p><a className="nav__trending" onClick={this.handleClick}>#trending</a></p>
-        </div>
         <div className="right-side">
-          <p>Built by <a onClick={this.openExternalLink} className="nav__pete" href="http://peteroo.me">
+          <p><a onClick={this.openExternalLink} className="nav__pete" href="http://peteroo.me">
             <svg
               width="90px"
               height="48px"
@@ -32,13 +28,6 @@ class Footer extends React.Component {
         </div>
       </footer>
     );
-  }
-
-  handleClick(event) {
-    event.preventDefault();
-    this.props.fetchGifs();
-    this.props.clearSearch();
-    window.scrollTo(0, 0);
   }
 
   openExternalLink(event) {

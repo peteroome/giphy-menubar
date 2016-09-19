@@ -31,10 +31,6 @@ describe("<SearchBox />", () => {
     expect(component.find('.search-box').length).to.equal(1);
   });
 
-  it('has a fixed-content div', () => {
-    expect(component.find('.fixed-content').length).to.equal(1);
-  });
-
   it('should render a SearchForm', () => {
     expect(component.find('SearchForm').length).to.equal(1);
     expect(
@@ -49,13 +45,6 @@ describe("<SearchBox />", () => {
     assert.isDefined(component.find('SearchForm').prop('newSearch'));
   });
 
-  it('should render a Footer', () => {
-    expect(component.find('Footer').length).to.equal(1);
-
-    assert.isDefined(component.find('Footer').prop('fetchGifs'));
-    assert.isDefined(component.find('Footer').prop('clearSearch'));
-  });
-
   it('should render some SearchResults', () => {
     expect(component.find('SearchResults').length).to.equal(1);
 
@@ -68,7 +57,7 @@ describe("<SearchBox />", () => {
       const component = shallow(<SearchBox />);
       expect(
         component
-          .find('.search-box')
+          .find('.search-results')
           .prop('onScroll')
       )
       .to

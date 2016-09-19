@@ -9,6 +9,7 @@ class SearchForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.scrollResultsToTop = this.scrollResultsToTop.bind(this);
   }
 
   render() {
@@ -21,9 +22,7 @@ class SearchForm extends React.Component {
             <input
               name="search"
               placeholder="Search"
-              value={value}
-              ref={(c) => this.search = c}
-              onChange={this.handleChange} />
+              ref={(c) => this.search = c} />
             <button type="submit">
               <img src="public/assets/images/icons/ic_search_white_36px.svg" alt="Search"/>
             </button>
@@ -43,7 +42,16 @@ class SearchForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.newSearch(this.search.value);
+    this.props.newSearch(this.search.value, this.scrollResultsToTop);
+  }
+
+  scrollResultsToTop() {
+    var $searchResults = $(".search-results")[0];
+
+    if($searchResults){
+      $(".search-results").animate({ scrollTop: 0 }, 100);
+      return false;
+    }
   }
 
   handleChange(event) {

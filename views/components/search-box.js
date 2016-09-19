@@ -26,19 +26,24 @@ class SearchBox extends React.Component {
   }
 
   handleScroll(event) {
-    var searchBox = event.currentTarget;
-    var windowHeight = searchBox.offsetHeight;
-    var scrollTop = searchBox.scrollTop;
-    var inHeight = window.innerHeight;
-    var totalScrolled = scrollTop + inHeight;
+    var searchResults = event.currentTarget;
+    var windowHeight = searchResults.offsetHeight;
+    var $contentHolder = $("ul", searchResults)[0];
 
-    if(totalScrolled + 100 > windowHeight){ //user reached at bottom
-      if(!this.state.loadingFlag && this.state.searchTerm){ //to avoid multiple request
-        this.setState({
-          loadingFlag: true,
-          offset: this.state.offset + 25,
-        });
-        this.fetchGifs();
+    if($contentHolder){
+      var bottomOfContent = $contentHolder.offsetHeight;
+      var scrollTop = searchResults.scrollTop;
+      var searchResultsHeight = searchResults.offsetHeight;
+      var totalScrolled = scrollTop + searchResultsHeight;
+
+      if(totalScrolled >= bottomOfContent){ //user reached at bottom
+        if(!this.state.loadingFlag && this.state.searchTerm){ //to avoid multiple requests
+          this.setState({
+            loadingFlag: true,
+            offset: this.state.offset + 25,
+          });
+          this.fetchGifs();
+        }
       }
     }
   }
@@ -49,16 +54,15 @@ class SearchBox extends React.Component {
 
   render() {
     return(
-      <div className="search-box" onScroll={this.handleScroll}>
-        <div className='fixed-content'>
-          <SearchForm
-            onUpdate={this.setSearchTerm}
-            currentSearchTerm={this.state.searchTerm}
-            newSearch={this.newSearch}
-          />
-          <Footer fetchGifs={this.fetchGifs} clearSearch={this.clearSearch} />
+      <div className="search-box">
+        <SearchForm
+          onUpdate={this.setSearchTerm}
+          currentSearchTerm={this.state.searchTerm}
+          newSearch={this.newSearch}
+        />
+      <div className="search-results" onScroll={this.handleScroll}>
+          <SearchResults gifs={this.state.gifs} />
         </div>
-        <SearchResults gifs={this.state.gifs} />
       </div>
     );
   }
@@ -69,13 +73,14 @@ class SearchBox extends React.Component {
     });
   }
 
-  newSearch(query) {
+  newSearch(query, callback) {
     this.setState({
       searchTerm: query,
       offset: 0,
       lastResultsCount: -1
     }, () => {
       this.fetchGifs();
+      callback();
     });
   }
 
