@@ -17,9 +17,9 @@ a.nav__pete:hover {
 }
 
 a.nav__pete svg {
-  width: 25px;
   position: relative;
-  height: 12px;
+  top: 1px;
+  transform: scale3d(1,1,1);
 }
 
 a.nav__trending,
