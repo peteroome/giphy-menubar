@@ -14,7 +14,7 @@ class Gif extends React.Component {
 
     this.image = this.props.giphyObject.images.fixed_width_downsampled;
     this.imageHD = this.props.giphyObject.images.fixed_width;
-    this.copyUrl = this.props.giphyObject.images.original.url;
+    this.copyUrl = this.props.giphyObject.images.fixed_width.url;
   }
 
   render() {
