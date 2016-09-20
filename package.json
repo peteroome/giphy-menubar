@@ -35,9 +35,9 @@
     "browser-sync": "^2.11.2",
     "browserify": "^12.0.1",
     "chai": "*",
+    "electron": "^1.4.0",
     "electron-packager": "^5.1.0",
-    "electron-prebuilt": "^0.36.0",
-    "electron-reload": "^0.2.0",
+    "electron-reload": "^1.0.2",
     "enzyme": "^2.2.0",
     "eslint": "^3.4.0",
     "eslint-config-airbnb": "^10.0.1",
@@ -67,7 +67,8 @@
     "babel-polyfill": "^6.13.0",
     "dotenv": "^2.0.0",
     "heap-api": "^1.0.1",
-    "menubar": "*"
+    "masonry-layout": "^4.1.1",
+    "menubar": "^5.1.0"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",

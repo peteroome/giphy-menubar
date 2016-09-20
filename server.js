@@ -3,9 +3,8 @@ require('dotenv').config();
 
 let path = require('path')
 
-require('electron-reload')(__dirname, {
-  electron: require('electron-prebuilt')
-});
+const {app} = require('electron');
+require('electron-reload')(__dirname);
 
 // Analytics
 let heap = require('heap-api')(process.env.HEAP_APP_ID);
@@ -21,7 +20,6 @@ let menu = menubar({
   frame: false,
   alwaysOnTop: true,
   icon: path.join(__dirname, 'public/assets/images', 'Icon.png'),
-  y: 26,
   resizable: false,
   movable: false,
   minimizable: false,

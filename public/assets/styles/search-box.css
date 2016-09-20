@@ -5,15 +5,7 @@
 
 .gif-list {
   z-index: 0;
-  width: 50%;
-}
-
-.gif-list.left {
-  float: left;
-}
-
-.gif-list.right {
-  float: right;
+  width: 100%;
 }
 
 .gif-list li,
@@ -23,4 +15,19 @@
 
 .gif-list img {
   display: block;
+}
+
+.gif-list li {
+	transform: translateY(200px);
+	animation: moveUp 0.25s ease forwards;
+}
+
+@-webkit-keyframes moveUp {
+	0% { }
+	100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes moveUp {
+	0% { }
+	100% { transform: translateY(0); opacity: 1; }
 }
