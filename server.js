@@ -10,7 +10,7 @@ require('electron-reload')(__dirname);
 let heap = require('heap-api')(process.env.HEAP_APP_ID);
 
 // Menubar
-const menubar = require('menubar')
+const menubar = require('menubar');
 
 let menuOptions = {
   tooltip: "Search Giphy!",
@@ -26,7 +26,7 @@ let menuOptions = {
   maximizable: false,
   fullscreenable: false,
   autoHideMenuBar: true
-}
+};
 
 if(process.env.NODE_ENV === 'development'){
   menuOptions.alwaysOnTop = true;
@@ -40,6 +40,7 @@ menu.on('ready', function ready(){
 
 menu.on('show', function ready(){
   heap.track('menubar:show');
+  menu.tray.setImage(path.join(__dirname, 'public/assets/images', 'IconPressed.png'));
 })
 
 menu.on('after-create-window', function after(){
@@ -50,4 +51,5 @@ menu.on('after-create-window', function after(){
 
 menu.on('hide', function ready(){
   heap.track('menubar:hide');
+  menu.tray.setImage(path.join(__dirname, 'public/assets/images', 'Icon.png'));
 })
