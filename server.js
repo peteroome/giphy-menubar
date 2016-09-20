@@ -12,13 +12,13 @@ let heap = require('heap-api')(process.env.HEAP_APP_ID);
 // Menubar
 const menubar = require('menubar')
 
-let menu = menubar({
+let menuOptions = {
   tooltip: "Search Giphy!",
   width: 420,
   height: 600,
   transparent: true,
   frame: false,
-  alwaysOnTop: true,
+  alwaysOnTop: false,
   icon: path.join(__dirname, 'public/assets/images', 'Icon.png'),
   resizable: false,
   movable: false,
@@ -26,13 +26,28 @@ let menu = menubar({
   maximizable: false,
   fullscreenable: false,
   autoHideMenuBar: true
-})
+}
+
+if(process.env.NODE_ENV === 'development'){
+  menuOptions.alwaysOnTop = true;
+}
+
+let menu = menubar(menuOptions);
 
 menu.on('ready', function ready(){
-  console.log('Ready…');
+  heap.track('menubar:ready');
+})
+
+menu.on('show', function ready(){
+  heap.track('menubar:show');
 })
 
 menu.on('after-create-window', function after(){
-  console.log('after-create-window.');
-  menu.window.openDevTools();
+  if(process.env.NODE_ENV === 'development'){
+    menu.window.openDevTools();
+  }
+})
+
+menu.on('hide', function ready(){
+  heap.track('menubar:hide');
 })

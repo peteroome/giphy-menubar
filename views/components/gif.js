@@ -1,4 +1,5 @@
 import React from 'react';
+import path from 'path';
 
 class Gif extends React.Component {
   constructor(props) {
@@ -36,7 +37,13 @@ class Gif extends React.Component {
 
     clipboard.writeText(this.copyUrl);
     new Notification('Giphy!', {
-      body: 'URL copied 🎉'
+      title: 'Hello world',
+      body: 'URL copied 🎉',
+      icon: path.join(__dirname, '../../public/assets/images/icons', 'giphy-logo.jpg')
+    });
+
+    heap.track('gif:clicked', {
+      url: this.copyUrl
     });
   }
 
