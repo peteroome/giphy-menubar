@@ -10,12 +10,10 @@ const $ = jQuery;
 import SearchForm from '../views/components/search-form';
 
 describe('SearchForm', () => {
-  var setSearchTerm = spy();
   var newSearch = spy();
 
   const component = shallow(
     <SearchForm
-      onUpdate={setSearchTerm}
       currentSearchTerm={'puppy'}
       newSearch={newSearch}
     />
@@ -23,7 +21,6 @@ describe('SearchForm', () => {
 
   const mountComponent = mount(
     <SearchForm
-      onUpdate={setSearchTerm}
       currentSearchTerm={'puppy'}
       newSearch={newSearch}
     />
@@ -55,9 +52,6 @@ describe('SearchForm', () => {
       var element = component.find('.search-form');
 
       expect(element.find('input').length).to.equal(1);
-      expect(element.find('input').prop('onChange')).to.equal(
-        component.instance().handleChange
-      );
       expect(element.find('button[type="submit"]').length).to.equal(1);
     });
   });

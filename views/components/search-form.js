@@ -8,7 +8,6 @@ class SearchForm extends React.Component {
     super(props);
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
     this.scrollResultsToTop = this.scrollResultsToTop.bind(this);
   }
 
@@ -52,11 +51,6 @@ class SearchForm extends React.Component {
       $(".search-results").animate({ scrollTop: 0 }, 100);
       return false;
     }
-  }
-
-  handleChange(event) {
-    let query = event.target.value;
-    this.props.onUpdate(query);
   }
 }
 

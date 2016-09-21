@@ -18,7 +18,6 @@ class SearchBox extends React.Component {
       searchTerm: ''
     };
 
-    this.setSearchTerm = this.setSearchTerm.bind(this);
     this.newSearch = this.newSearch.bind(this);
     this.fetchGifs = this.fetchGifs.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
@@ -56,7 +55,6 @@ class SearchBox extends React.Component {
     return(
       <div className="search-box">
         <SearchForm
-          onUpdate={this.setSearchTerm}
           currentSearchTerm={this.state.searchTerm}
           newSearch={this.newSearch}
         />
@@ -67,20 +65,17 @@ class SearchBox extends React.Component {
     );
   }
 
-  setSearchTerm(query) {
-    this.setState({
-      searchTerm: query
-    });
-  }
-
-  newSearch(query, callback) {
+  newSearch(query, callback = null) {
     this.setState({
       searchTerm: query,
       offset: 0,
       lastResultsCount: -1
     }, () => {
       this.fetchGifs();
-      callback();
+
+      if (callback){
+        callback();
+      }
     });
   }
 

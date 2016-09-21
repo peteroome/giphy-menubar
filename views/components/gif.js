@@ -35,15 +35,16 @@ class Gif extends React.Component {
   handleClick(event) {
     event.preventDefault();
 
+    console.log(heap.track('gif:clicked'));
+    heap.track('gif', {
+      url: this.copyUrl
+    });
+
     clipboard.writeText(this.copyUrl);
     new Notification('Giphy!', {
       title: 'Hello world',
       body: 'URL copied 🎉',
       icon: path.join(__dirname, '../../public/assets/images/icons', 'giphy-logo.jpg')
-    });
-
-    heap.track('gif:clicked', {
-      url: this.copyUrl
     });
   }
 

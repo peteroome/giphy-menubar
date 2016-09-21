@@ -16,6 +16,10 @@ describe("<SearchBox />", () => {
     <SearchBox />
   );
 
+  const mountComponent = mount(
+    <SearchBox />
+  );
+
   let defaultState = {
     gifs: [],
     loadingFlag: false,
@@ -27,7 +31,7 @@ describe("<SearchBox />", () => {
     expect(component.state()).to.eql(defaultState);
   });
 
-  it('contains a gif-container', () => {
+  it('contains a search-box', () => {
     expect(component.find('.search-box').length).to.equal(1);
   });
 
@@ -41,7 +45,6 @@ describe("<SearchBox />", () => {
         .prop('currentSearchTerm')
     ).to.equal('Hello World')
 
-    assert.isDefined(component.find('SearchForm').prop('onUpdate'));
     assert.isDefined(component.find('SearchForm').prop('newSearch'));
   });
 
@@ -54,7 +57,6 @@ describe("<SearchBox />", () => {
 
   describe('#handleScroll()', () => {
     it('has an onScroll property assigned the handleScroll function', () => {
-      const component = shallow(<SearchBox />);
       expect(
         component
           .find('.search-results')
@@ -77,24 +79,20 @@ describe("<SearchBox />", () => {
     });
   });
 
-  describe('#searchTerm()', () => {
-    it('sets the search term when searchTerm is called', () => {
-      const component = mount(<SearchBox />);
-      var setSearchTermSpy = spy(component.node, 'setSearchTerm');
-      component.node.setSearchTerm('Hello World')
-
-      expect(component.state('searchTerm')).to.equal('Hello World');
-    });
-  });
-
   describe('#newSearch()', () => {
-    it('sets the searchTerm state to the new search', () => {
-      const component = mount(<SearchBox />);
-      var clearSearchSpy = spy(component.node, 'newSearch');
+    var clearSearchSpy = spy(mountComponent.node, 'newSearch');
 
-      component.node.newSearch('Puppies');
-      expect(component.state('searchTerm')).to.equal('Puppies');
-      expect(component.state('offset')).to.equal(0);
+    it('sets the searchTerm state to the new search', () => {
+      mountComponent.node.newSearch('Puppies');
+      expect(mountComponent.state('searchTerm')).to.equal('Puppies');
+      expect(mountComponent.state('offset')).to.equal(0);
+    });
+
+    it('calls the callback if provided', () => {
+      var callbackSpy = spy();
+
+      mountComponent.node.newSearch('Puppies', callbackSpy);
+      assert(callbackSpy.calledOnce);
     });
   });
 
@@ -108,16 +106,15 @@ describe("<SearchBox />", () => {
 
   describe('#clearSearch()', () => {
     it('clears the search when clearSearch is called', () => {
-      const component = mount(<SearchBox />);
-      var clearSearchSpy = spy(component.node, 'clearSearch');
-      component.setState({
+      var clearSearchSpy = spy(mountComponent.node, 'clearSearch');
+      mountComponent.setState({
         searchTerm: "Hello World"
       });
 
-      expect(component.state('searchTerm')).to.equal('Hello World');
+      expect(mountComponent.state('searchTerm')).to.equal('Hello World');
 
-      component.node.clearSearch();
-      expect(component.state('searchTerm')).to.equal('');
+      mountComponent.node.clearSearch();
+      expect(mountComponent.state('searchTerm')).to.equal('');
     });
   });
 });

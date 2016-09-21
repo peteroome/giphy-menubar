@@ -14,6 +14,6 @@ import App from '../../../views/components/app';
 ReactDOM.render(
   <App />,
   document.getElementById('app-container'), () => {
-    console.timeEnd('react-app')
+    console.timeEnd('react-app');
   }
 );

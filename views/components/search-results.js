@@ -1,13 +1,19 @@
 import React from 'react';
-import Masonry from 'masonry-layout';
+// import Masonry from 'masonry-layout';
+
 import SearchResultsLineItem from './search-results-line-item';
 
 class SearchResults extends React.Component {
   componentDidUpdate() {
-    new Masonry('.gif-list', {
-      itemSelector: 'li.gif',
-      columnWidth: 200
-    });
+    var gridContainer = document.getElementsByClassName('.gif-list')[0];
+    var gridItems = document.getElementsByClassName('.li.gif');
+
+    if(gridContainer && gridItems){
+      let msnry = new Masonry('.gif-list', {
+        itemSelector: 'li.gif',
+        columnWidth: 200
+      });
+    }
   }
 
   render() {

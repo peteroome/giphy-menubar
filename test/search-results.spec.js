@@ -26,22 +26,12 @@ describe("<SearchResults />", () => {
 
     it('contains a ul.gif-list', () => {
       let elements = component.find('ul.gif-list');
-      expect(elements.length).to.equal(2);
-    });
-
-    it('contains a ul.gif-list.left', () => {
-      let element = component.find('ul.gif-list.left');
-      expect(element.length).to.equal(1);
-    });
-
-    it('contains a ul.gif-list.right', () => {
-      let element = component.find('ul.gif-list.right');
-      expect(element.length).to.equal(1);
+      expect(elements.length).to.equal(1);
     });
 
     it('contains some <SearchResultsLineItem /> components', () => {
       let childComponents = component.find(SearchResultsLineItem);
-      expect(childComponents.length).to.equal(3);
+      expect(childComponents.length).to.equal(4);
     });
   });
 });

@@ -3,7 +3,7 @@ require('dotenv').config();
 
 let path = require('path')
 
-const {app} = require('electron');
+const {app, Menu} = require('electron');
 require('electron-reload')(__dirname);
 
 // Analytics
@@ -34,8 +34,23 @@ if(process.env.NODE_ENV === 'development'){
 
 let menu = menubar(menuOptions);
 
+function initTray(tray){
+  tray.on('right-click', function(){
+    var contextMenu = Menu.buildFromTemplate([
+      {
+        label: 'Quit',
+        accelerator: 'Command+Q',
+        selector: 'terminate:',
+      }
+    ]);
+    tray.setToolTip('This is my application.');
+    tray.setContextMenu(contextMenu);
+  })
+}
+
 menu.on('ready', function ready(){
   heap.track('menubar:ready');
+  initTray(menu.tray);
 })
 
 menu.on('show', function ready(){
