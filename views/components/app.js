@@ -30,11 +30,16 @@ class App extends React.Component {
   }
 
   isOnline() {
-    return navigator.onLine ? true : false;
+    let onlineOrNot = navigator.onLine ? true : false;
+    heap.track('menubar:checkOnline', {
+      isOnline: onlineOrNot
+    });
+    return onlineOrNot;
   }
 
   checkOnline(event) {
     event.preventDefault();
+    heap.track('menubar:checkOnline');
     this.forceUpdate();
   }
 }

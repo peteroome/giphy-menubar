@@ -9,7 +9,7 @@ class SearchResults extends React.Component {
     var gridItems = document.getElementsByClassName('.li.gif');
 
     if(gridContainer && gridItems){
-      let msnry = new Masonry('.gif-list', {
+      new Masonry('.gif-list', {
         itemSelector: 'li.gif',
         columnWidth: 200
       });
