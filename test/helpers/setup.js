@@ -11,6 +11,9 @@ global.document = jsdom('<!doctype html><html><body></body></html>');
 // get the window object out of the document
 global.window = document.defaultView;
 
+// Setup to help pass the Masonry related tests
+global.Element = function(){};
+
 // take all properties of the window object and also attach it to the
 // mocha global object
 Object.keys(document.defaultView).forEach((property) => {

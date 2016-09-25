@@ -12,34 +12,27 @@ class App extends React.Component {
   }
 
 	render() {
+    let appComponent;
     if (this.isOnline()) {
-      return(
-        <div className="app">
-          <SearchBox />
-          <Footer />
-        </div>
-      );
+      appComponent = <SearchBox />;
     } else {
-      return(
-        <div className="app">
-          <Offline tryAgain={this.checkOnline} />
-          <Footer />
-        </div>
-      );
+      appComponent = <Offline tryAgain={this.checkOnline} />
     }
+
+    return(
+      <div className="app">
+        {appComponent}
+        <Footer />
+      </div>
+    );
   }
 
   isOnline() {
-    let onlineOrNot = navigator.onLine ? true : false;
-    heap.track('menubar:checkOnline', {
-      isOnline: onlineOrNot
-    });
-    return onlineOrNot;
+    return navigator.onLine ? true : false;
   }
 
   checkOnline(event) {
     event.preventDefault();
-    heap.track('menubar:checkOnline');
     this.forceUpdate();
   }
 }

@@ -3,6 +3,7 @@ import { shallow, mount, render } from 'enzyme';
 import { spy, stub } from 'sinon';
 
 import React from 'react';
+import Masonry from 'react-masonry-component';
 
 import SearchResults from '../views/components/search-results';
 import SearchResultsLineItem from '../views/components/search-results-line-item';
@@ -24,8 +25,13 @@ describe("<SearchResults />", () => {
       expect(component.find('.gif-list-container').length).to.equal(1);
     });
 
-    it('contains a ul.gif-list', () => {
-      let elements = component.find('ul.gif-list');
+    it('contains a .gif-list', () => {
+      let elements = component.find('.gif-list');
+      expect(elements.length).to.equal(1);
+    });
+
+    it('contains a <Masonry> component', () => {
+      let elements = component.find(Masonry);
       expect(elements.length).to.equal(1);
     });
 
