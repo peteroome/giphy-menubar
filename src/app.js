@@ -1,5 +1,7 @@
 'use babel'
 
+import env from './env';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -8,8 +10,7 @@ import dotenv from 'dotenv'
 dotenv.config();
 const heapID = process.env.HEAP_APP_ID
 
-import jQuery from 'jquery';
-import App from '../../../views/components/app';
+import App from './views/components/app';
 
 ReactDOM.render(
   <App />,

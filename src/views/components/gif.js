@@ -43,8 +43,7 @@ class Gif extends React.Component {
     clipboard.writeText(this.copyUrl);
     new Notification('Giphy!', {
       title: 'Hello world',
-      body: 'URL copied 🎉',
-      icon: path.join(__dirname, '../../public/assets/images/icons', 'giphy-logo.jpg')
+      body: 'URL copied 🎉'
     });
   }
 

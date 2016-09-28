@@ -1,5 +1,9 @@
 'use strict';
-require('dotenv').config();
+
+require('babel-register');
+
+import env from './env';
+console.log('Loaded environment variables:', env);
 
 let path = require('path')
 

@@ -23,7 +23,7 @@ class SearchForm extends React.Component {
               placeholder="Search"
               ref={(c) => this.search = c} />
             <button type="submit">
-              <img src="public/assets/images/icons/ic_search_white_36px.svg" alt="Search"/>
+              <img src="./src/images/icons/ic_search_white_36px.svg" alt="Search"/>
             </button>
           </fieldset>
         </form>
