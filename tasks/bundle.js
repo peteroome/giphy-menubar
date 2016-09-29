@@ -13,37 +13,37 @@ var nodeBuiltInModules = ['assert', 'buffer', 'child_process', 'cluster',
 var electronBuiltInModules = ['electron'];
 
 var npmModulesUsedInApp = function () {
-    var appManifest = require('../app/package.json');
-    return Object.keys(appManifest.dependencies);
+  var appManifest = require('../app/package.json');
+  return Object.keys(appManifest.dependencies);
 };
 
 var generateExternalModulesList = function () {
-    return [].concat(nodeBuiltInModules, electronBuiltInModules, npmModulesUsedInApp());
+  return [].concat(nodeBuiltInModules, electronBuiltInModules, npmModulesUsedInApp());
 };
 
 var cached = {};
 
 module.exports = function (src, dest) {
-    return rollup({
-        entry: src,
-        external: generateExternalModulesList(),
-        cache: cached[src],
-    })
-    .then(function (bundle) {
-        cached[src] = bundle;
+  return rollup({
+      entry: src,
+      external: generateExternalModulesList(),
+      cache: cached[src],
+  })
+  .then(function (bundle) {
+      cached[src] = bundle;
 
-        var jsFile = path.basename(dest);
-        var result = bundle.generate({
-            format: 'cjs',
-            sourceMap: true,
-            sourceMapFile: jsFile,
-        });
-        // Wrap code in self invoking function so the variables don't
-        // pollute the global namespace.
-        var isolatedCode = '(function () {' + result.code + '\n}());';
-        return Promise.all([
-            jetpack.writeAsync(dest, isolatedCode + '\n//# sourceMappingURL=' + jsFile + '.map'),
-            jetpack.writeAsync(dest + '.map', result.map.toString()),
-        ]);
-    });
+      var jsFile = path.basename(dest);
+      var result = bundle.generate({
+          format: 'cjs',
+          sourceMap: true,
+          sourceMapFile: jsFile,
+      });
+      // Wrap code in self invoking function so the variables don't
+      // pollute the global namespace.
+      var isolatedCode = '(function () {' + result.code + '\n}());';
+      return Promise.all([
+        jetpack.writeAsync(dest, isolatedCode + '\n//# sourceMappingURL=' + jsFile + '.map'),
+        jetpack.writeAsync(dest + '.map', result.map.toString()),
+      ]);
+  });
 };

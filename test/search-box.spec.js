@@ -37,14 +37,6 @@ describe("<SearchBox />", () => {
 
   it('should render a SearchForm', () => {
     expect(component.find('SearchForm').length).to.equal(1);
-    expect(
-      component.setState({
-        searchTerm: 'Hello World'
-      })
-      .find('SearchForm')
-        .prop('currentSearchTerm')
-    ).to.equal('Hello World')
-
     assert.isDefined(component.find('SearchForm').prop('newSearch'));
   });
 

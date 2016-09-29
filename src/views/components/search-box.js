@@ -55,7 +55,6 @@ class SearchBox extends React.Component {
     return(
       <div className="search-box">
         <SearchForm
-          currentSearchTerm={this.state.searchTerm}
           newSearch={this.newSearch}
         />
       <div className="search-results" onScroll={this.handleScroll}>

@@ -1,6 +1,6 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import jQuery from 'jquery';
+
 const $ = jQuery;
 
 class SearchForm extends React.Component {
@@ -9,26 +9,6 @@ class SearchForm extends React.Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.scrollResultsToTop = this.scrollResultsToTop.bind(this);
-  }
-
-  render() {
-    let value = this.props.currentSearchTerm || ""
-
-    return (
-      <div className="form-holder">
-        <form className="search-form" onSubmit={this.handleSubmit}>
-          <fieldset>
-            <input
-              name="search"
-              placeholder="Search"
-              ref={(c) => this.search = c} />
-            <button type="submit">
-              <img src="./src/images/icons/ic_search_white_36px.svg" alt="Search"/>
-            </button>
-          </fieldset>
-        </form>
-      </div>
-    );
   }
 
   componentDidMount() {
@@ -45,13 +25,35 @@ class SearchForm extends React.Component {
   }
 
   scrollResultsToTop() {
-    var $searchResults = $(".search-results")[0];
+    let $searchResults = $('.search-results')[0];
 
-    if($searchResults){
-      $(".search-results").animate({ scrollTop: 0 }, 100);
+    if ($searchResults){
+      $('.search-results').animate({ scrollTop: 0 }, 100);
       return false;
     }
   }
+
+  render() {
+    return (
+      <div className="form-holder">
+        <form className="search-form" onSubmit={this.handleSubmit}>
+          <fieldset>
+            <input
+              name="search"
+              placeholder="Search"
+              ref={(c) => this.search = c} />
+            <button type="submit">
+              <img src="./src/images/icons/ic_search_white_36px.svg" alt="Search" />
+            </button>
+          </fieldset>
+        </form>
+      </div>
+    );
+  }
 }
+
+SearchForm.propTypes = {
+  newSearch: React.PropTypes.func
+};
 
 export default SearchForm;

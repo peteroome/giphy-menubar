@@ -54,7 +54,7 @@ gulp.task('css', function () {
     .pipe(gulp.dest(destDir.path('stylesheets')));
 });
 
-gulp.task('watch', ['serve'], function () {
+gulp.task('watch', function () {
   var beepOnError = function (done) {
     return function (err) {
       if (err) {
@@ -73,4 +73,4 @@ gulp.task('watch', ['serve'], function () {
   }));
 });
 
-gulp.task('build', ['environment', 'css', 'watch']);
+gulp.task('build', ['bundle', 'environment', 'css', 'watch']);

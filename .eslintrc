@@ -20,6 +20,7 @@
   },
   "plugins": [
     "import",
-    "react"
+    "react",
+    "jsx-a11y"
   ]
 }
