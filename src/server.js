@@ -1,17 +1,14 @@
-'use strict';
-
 import env from './env';
-console.log('Loaded environment variables:', env);
 
 require('babel-register');
 
 const path = require('path');
 
-const {app, Menu} = require('electron');
+const { Menu } = require('electron');
 require('electron-reload')(__dirname);
 
 // Analytics
-const heap = require('heap-api')(process.env.HEAP_APP_ID);
+const heap = require('heap-api')(env.HEAP_APP_ID);
 
 // Menubar
 const menubar = require('menubar');
@@ -32,15 +29,15 @@ const menuOptions = {
   autoHideMenuBar: true
 };
 
-if(env.NODE_ENV === 'development'){
+if (env.NODE_ENV === 'development') {
   menuOptions.alwaysOnTop = true;
 }
 
 const menu = menubar(menuOptions);
 
-function initTray(tray){
+function initTray(tray) {
   tray.on('right-click', () => {
-    var contextMenu = Menu.buildFromTemplate([
+    const contextMenu = Menu.buildFromTemplate([
       {
         label: 'Quit',
         accelerator: 'Command+Q',
@@ -49,26 +46,26 @@ function initTray(tray){
     ]);
     tray.setToolTip('This is my application.');
     tray.setContextMenu(contextMenu);
-  })
+  });
 }
 
-menu.on('ready', ready() => {
+menu.on('ready', () => {
   heap.track('menubar:ready');
   initTray(menu.tray);
-})
+});
 
-menu.on('show', ready() => {
+menu.on('show', () => {
   heap.track('menubar:show');
   menu.tray.setImage(path.join(__dirname, 'public/assets/images', 'IconPressed.png'));
-})
+});
 
-menu.on('after-create-window', after() => {
-  if(process.env.NODE_ENV === 'development'){
+menu.on('after-create-window', () => {
+  if (process.env.NODE_ENV === 'development') {
     menu.window.openDevTools();
   }
-})
+});
 
-menu.on('hide', ready() => {
+menu.on('hide', () => {
   heap.track('menubar:hide');
   menu.tray.setImage(path.join(__dirname, 'public/assets/images', 'Icon.png'));
-})
+});

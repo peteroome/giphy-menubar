@@ -27,7 +27,7 @@ class SearchResults extends React.Component {
 }
 
 SearchResults.propTypes = {
-  gifs: React.PropTypes.array
+  gifs: React.PropTypes.arrayOf(React.PropTypes.object)
 };
 
 export default SearchResults;

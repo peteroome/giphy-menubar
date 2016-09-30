@@ -18,8 +18,39 @@ class Gif extends React.Component {
     this.copyUrl = this.props.giphyObject.images.fixed_width.url;
   }
 
+  handleClick(event) {
+    event.preventDefault();
+    clipboard.writeText(this.copyUrl);
+    new Notification('Giphy!', {
+      title: 'Hello world',
+      body: 'URL copied 🎉'
+    });
+  }
+
+  handleMouseOver(event) {
+    const img = event.currentTarget;
+
+    if (!this.state.hd) {
+      img.src = this.imageHD.url;
+      this.setState({
+        hd: true
+      });
+    }
+  }
+
+  handleMouseOut(event) {
+    const img = event.currentTarget;
+
+    if (this.state.hd) {
+      img.src = this.image.url;
+      this.setState({
+        hd: false
+      });
+    }
+  }
+
   render() {
-    return(
+    return (
       <img
         width={this.image.width}
         height={this.image.height}
@@ -31,43 +62,10 @@ class Gif extends React.Component {
       />
     );
   }
-
-  handleClick(event) {
-    event.preventDefault();
-
-    console.log(heap.track('gif:clicked'));
-    heap.track('gif', {
-      url: this.copyUrl
-    });
-
-    clipboard.writeText(this.copyUrl);
-    new Notification('Giphy!', {
-      title: 'Hello world',
-      body: 'URL copied 🎉'
-    });
-  }
-
-  handleMouseOver(event){
-    const img = event.currentTarget;
-
-    if (!this.state.hd) {
-      img.src = this.imageHD.url;
-      this.setState({
-        hd: true
-      })
-    }
-  }
-
-  handleMouseOut(event){
-    const img = event.currentTarget;
-
-    if (this.state.hd) {
-      img.src = this.image.url;
-      this.setState({
-        hd: false
-      })
-    }
-  }
 }
+
+Gif.propTypes = {
+  giphyObject: React.PropTypes.object
+};
 
 export default Gif;

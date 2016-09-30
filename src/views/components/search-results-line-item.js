@@ -12,7 +12,7 @@ class SearchResultsLineItem extends React.Component {
 }
 
 SearchResultsLineItem.propTypes = {
-  gif: React.PropTypes.object
+  gif: React.PropTypes.instanceOf(Gif)
 };
 
 export default SearchResultsLineItem;

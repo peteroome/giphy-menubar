@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import jQuery from 'jquery';
-const $ = jQuery;
 
+import env from './../../env';
 import SearchForm from './search-form';
-import Footer from './footer';
 import SearchResults from './search-results';
+
+const $ = jQuery;
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -24,19 +24,24 @@ class SearchBox extends React.Component {
     this.clearSearch = this.clearSearch.bind(this);
   }
 
+  componentWillMount() {
+    this.fetchGifs();
+  }
+
   handleScroll(event) {
-    var searchResults = event.currentTarget;
-    var windowHeight = searchResults.offsetHeight;
-    var $contentHolder = $("ul", searchResults)[0];
+    const searchResults = event.currentTarget;
+    const $contentHolder = $('ul', searchResults)[0];
 
-    if($contentHolder){
-      var bottomOfContent = $contentHolder.offsetHeight;
-      var scrollTop = searchResults.scrollTop;
-      var searchResultsHeight = searchResults.offsetHeight;
-      var totalScrolled = scrollTop + searchResultsHeight;
+    if ($contentHolder) {
+      const bottomOfContent = $contentHolder.offsetHeight;
+      const scrollTop = searchResults.scrollTop;
+      const searchResultsHeight = searchResults.offsetHeight;
+      const totalScrolled = scrollTop + searchResultsHeight;
 
-      if(totalScrolled >= bottomOfContent){ //user reached at bottom
-        if(!this.state.loadingFlag && this.state.searchTerm){ //to avoid multiple requests
+      //user reached at bottom
+      if (totalScrolled >= bottomOfContent) {
+        //to avoid multiple requests
+        if (!this.state.loadingFlag && this.state.searchTerm) {
           this.setState({
             loadingFlag: true,
             offset: this.state.offset + 25,
@@ -47,23 +52,6 @@ class SearchBox extends React.Component {
     }
   }
 
-  componentWillMount() {
-    this.fetchGifs();
-  }
-
-  render() {
-    return(
-      <div className="search-box">
-        <SearchForm
-          newSearch={this.newSearch}
-        />
-      <div className="search-results" onScroll={this.handleScroll}>
-          <SearchResults gifs={this.state.gifs} />
-        </div>
-      </div>
-    );
-  }
-
   newSearch(query, callback = null) {
     this.setState({
       searchTerm: query,
@@ -72,7 +60,7 @@ class SearchBox extends React.Component {
     }, () => {
       this.fetchGifs();
 
-      if (callback){
+      if (callback) {
         callback();
       }
     });
@@ -80,20 +68,20 @@ class SearchBox extends React.Component {
 
   fetchGifs() {
     // Don't pound the API if we didn't get any results.
-    if(this.state.lastResultsCount !== 0){
-      let queryUrl = process.env.GIPHY_URL
-      let queryPath = '/trending'
-      let queryData = { 'api_key': process.env.GIPHY_API_KEY }
+    if (this.state.lastResultsCount !== 0) {
+      let queryUrl = env.GIPHY_URL;
+      let queryPath = '/trending';
+      let queryData = { api_key: env.GIPHY_API_KEY };
 
-      if(this.state.searchTerm && this.state.searchTerm.length > 0) {
-        queryPath = `/search`;
+      if (this.state.searchTerm && this.state.searchTerm.length > 0) {
+        queryPath = '/search';
         queryData = $.extend(queryData, {
-          'q': this.state.searchTerm,
-          'offset': this.state.offset
+          q: this.state.searchTerm,
+          offset: this.state.offset
         });
       }
       queryData = $.param(queryData);
-      queryUrl = queryUrl + queryPath + "?" + queryData
+      queryUrl = queryUrl + queryPath + '?' + queryData;
 
       $.ajax({
         method: 'GET',
@@ -113,7 +101,7 @@ class SearchBox extends React.Component {
             gifs: gifsArray,
             loadingFlag: false,
             lastResultsCount: gifs.data.length
-          })
+          });
         }
       });
     }
@@ -121,6 +109,19 @@ class SearchBox extends React.Component {
 
   clearSearch() {
     this.setState({ searchTerm: '' });
+  }
+
+  render() {
+    return (
+      <div className="search-box">
+        <SearchForm
+          newSearch={this.newSearch}
+        />
+        <div className="search-results" onScroll={this.handleScroll}>
+          <SearchResults gifs={this.state.gifs} />
+        </div>
+      </div>
+    );
   }
 }
 

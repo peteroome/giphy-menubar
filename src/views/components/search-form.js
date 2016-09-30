@@ -25,9 +25,9 @@ class SearchForm extends React.Component {
   }
 
   scrollResultsToTop() {
-    let $searchResults = $('.search-results')[0];
+    const $searchResults = $('.search-results')[0];
 
-    if ($searchResults){
+    if ($searchResults) {
       $('.search-results').animate({ scrollTop: 0 }, 100);
       return false;
     }
@@ -41,7 +41,8 @@ class SearchForm extends React.Component {
             <input
               name="search"
               placeholder="Search"
-              ref={(c) => this.search = c} />
+              ref={(c) => this.search = c}
+            />
             <button type="submit">
               <img src="./src/images/icons/ic_search_white_36px.svg" alt="Search" />
             </button>
