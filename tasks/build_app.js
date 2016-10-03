@@ -1,42 +1,39 @@
-'use strict';
+const gulp = require('gulp');
+const del = require('del');
+const dotenvToJson = require('gulp-dotenv-to-json');
+const watch = require('gulp-watch');
+const batch = require('gulp-batch');
+const merge = require('gulp-merge-json');
+const plumber = require('gulp-plumber');
+const jetpack = require('fs-jetpack');
+const bundle = require('./bundle');
+const utils = require('./utils');
 
-var gulp = require('gulp');
-var del = require('del');
-var dotenvToJson = require ('gulp-dotenv-to-json');
-var watch = require('gulp-watch');
-var batch = require('gulp-batch');
-var merge = require('gulp-merge-json');
-var plumber = require('gulp-plumber');
-var jetpack = require('fs-jetpack');
-var bundle = require('./bundle');
-var utils = require('./utils');
+const srcDir = jetpack.cwd('./src');
+const destDir = jetpack.cwd('./app');
+const configDir = jetpack.cwd('./config');
 
-var projectDir = jetpack;
-var srcDir = jetpack.cwd('./src');
-var destDir = jetpack.cwd('./app');
-var configDir = jetpack.cwd('./config');
-
-gulp.task('bundle', function () {
-  return Promise.all([
+gulp.task('bundle', () => {
+  Promise.all([
     bundle(srcDir.path('server.js'), destDir.path('server.js')),
     bundle(srcDir.path('app.js'), destDir.path('app.js')),
   ]);
 });
 
-gulp.task('clean', function () {
-  return del('.config/tmp');
+gulp.task('clean', () => {
+  del('.config/tmp');
 });
 
-gulp.task('environment', ['clean'], function () {
-  var configFile = 'config/env_' + utils.getEnvName() + '.json';
-  var privateConfigFile = '/tmp/env_private.json';
+gulp.task('environment', ['clean'], () => {
+  const configFile = `config/env_${utils.getEnvName()}.json`;
+  const privateConfigFile = '/tmp/env_private.json';
 
   // Get env vars from .env
   dotenvToJson.copy({
-    keys : ['*'],
-    paths : {
-      env : '.env',
-      jenv : configDir.path(privateConfigFile)
+    keys: ['*'],
+    paths: {
+      env: '.env',
+      jenv: configDir.path(privateConfigFile)
     }
   });
 
@@ -48,27 +45,25 @@ gulp.task('environment', ['clean'], function () {
     .pipe(gulp.dest(destDir.path()));
 });
 
-gulp.task('css', function () {
-  return gulp.src(srcDir.path('stylesheets/*.css'))
+gulp.task('css', () => {
+  gulp.src(srcDir.path('stylesheets/*.css'))
     .pipe(plumber())
     .pipe(gulp.dest(destDir.path('stylesheets')));
 });
 
-gulp.task('watch', function () {
-  var beepOnError = function (done) {
-    return function (err) {
-      if (err) {
-        utils.beepSound();
-      }
-      done(err);
-    };
+gulp.task('watch', () => {
+  const beepOnError = done => (err) => {
+    if (err) {
+      utils.beepSound();
+    }
+    done(err);
   };
 
-  watch('src/**/*.js', batch(function (events, done) {
+  watch('src/**/*.js', batch((events, done) => {
     gulp.start('bundle', beepOnError(done));
   }));
 
-  watch('src/**/*.css', batch(function (events, done) {
+  watch('src/**/*.css', batch((events, done) => {
     gulp.start('css', beepOnError(done));
   }));
 });

@@ -1,16 +1,16 @@
 import React from 'react';
 
 class Footer extends React.Component {
+  static openExternalLink(event) {
+    event.preventDefault();
+    const href = event.currentTarget.href;
+    shell.openExternal(href);
+  }
+
   constructor(props) {
     super(props);
 
     this.openExternalLink = this.openExternalLink.bind(this);
-  }
-
-  openExternalLink(event) {
-    event.preventDefault();
-    const href = event.currentTarget.href;
-    shell.openExternal(href);
   }
 
   render() {

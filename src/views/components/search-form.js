@@ -4,6 +4,15 @@ import jQuery from 'jquery';
 const $ = jQuery;
 
 class SearchForm extends React.Component {
+  static scrollResultsToTop() {
+    const $searchResults = $('.search-results')[0];
+
+    if ($searchResults) {
+      $('.search-results').animate({ scrollTop: 0 }, 100);
+      return false;
+    }
+  }
+
   constructor(props) {
     super(props);
 
@@ -24,15 +33,6 @@ class SearchForm extends React.Component {
     this.props.newSearch(this.search.value, this.scrollResultsToTop);
   }
 
-  scrollResultsToTop() {
-    const $searchResults = $('.search-results')[0];
-
-    if ($searchResults) {
-      $('.search-results').animate({ scrollTop: 0 }, 100);
-      return false;
-    }
-  }
-
   render() {
     return (
       <div className="form-holder">
@@ -41,7 +41,7 @@ class SearchForm extends React.Component {
             <input
               name="search"
               placeholder="Search"
-              ref={(c) => this.search = c}
+              ref={(c) => { this.search = c; }}
             />
             <button type="submit">
               <img src="./src/images/icons/ic_search_white_36px.svg" alt="Search" />

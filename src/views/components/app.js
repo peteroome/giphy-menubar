@@ -11,10 +11,6 @@ class App extends React.Component {
     this.checkOnline = this.checkOnline.bind(this);
   }
 
-  isOnline() {
-    return navigator.onLine ? true : false;
-  }
-
   checkOnline(event) {
     event.preventDefault();
     this.forceUpdate();
@@ -22,7 +18,7 @@ class App extends React.Component {
 
   render() {
     let appComponent;
-    if (this.isOnline()) {
+    if (navigator.onLine) {
       appComponent = <SearchBox />;
     } else {
       appComponent = <Offline tryAgain={this.checkOnline} />;

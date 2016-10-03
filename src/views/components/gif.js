@@ -1,5 +1,4 @@
 import React from 'react';
-import path from 'path';
 
 class Gif extends React.Component {
   constructor(props) {
@@ -65,7 +64,7 @@ class Gif extends React.Component {
 }
 
 Gif.propTypes = {
-  giphyObject: React.PropTypes.object
+  giphyObject: React.PropTypes.shape
 };
 
 export default Gif;

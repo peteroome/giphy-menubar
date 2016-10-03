@@ -79,6 +79,7 @@
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.9",
     "jsdom": "^9.2.1",
+    "jquery": "^2.2.3",
     "mocha": "*",
     "mockery": "^1.7.0",
     "react": "^15.3.1",

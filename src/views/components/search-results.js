@@ -15,11 +15,9 @@ class SearchResults extends React.Component {
           className="gif-list"
           options={masonryOptions}
         >
-          {this.props.gifs.map((gif, index) => {
-            return (
-              <SearchResultsLineItem key={index} gif={gif} />
-            );
-          })}
+          {this.props.gifs.map((gif, index) => (
+            <SearchResultsLineItem key={index} gif={gif} />
+          ))}
         </Masonry>
       </div>
     );

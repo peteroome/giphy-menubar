@@ -1,5 +1,3 @@
-'use strict';
-
 // require('./tasks/build_app');
 
 import gulp from 'gulp';
@@ -20,7 +18,7 @@ const sync = browserSync.create();
 
 // Input file.
 watchify.args.debug = true;
-var bundler = browserify('src/app.js', watchify.args);
+const bundler = browserify('src/app.js', watchify.args);
 
 // Babel transform
 bundler.transform(babelify.configure({
@@ -32,8 +30,8 @@ bundler.on('update', bundle);
 
 function bundle() {
   return bundler.bundle()
-    .on('error', function(error){
-      console.error( '\nError: ', error.message, '\n');
+    .on('error', (error) => {
+      console.error('\nError: ', error.message, '\n');
       this.emit('end');
     })
     .pipe(exorcist('app/bundle.js.map'))
@@ -48,18 +46,16 @@ gulp.task('default', ['transpile']);
 gulp.task('transpile', ['lint'], () => bundle());
 
 gulp.task('lint', () => {
-  // return gulp.src(['src/app.js', 'gulpfile.babel.js'])
-  return gulp.src(['./src/**/*.js', '!node_modules/**'])
+  gulp.src(['./src/**/*.js', '!node_modules/**'])
     .pipe(eslint())
-    .pipe(eslint.format())
-    .pipe(eslint.failAfterError());
+    .pipe(eslint.format());
 });
 
-gulp.task('serve', ['transpile'], () => sync.init({ server: 'public' }))
+gulp.task('serve', ['transpile'], () => sync.init({ server: 'public' }));
 gulp.task('js-watch', ['transpile'], () => sync.reload());
 
 gulp.task('watch', ['serve'], () => {
-  gulp.watch('src/**/*', ['js-watch'])
-  gulp.watch('src/**/*.css', sync.reload)
-  gulp.watch('app/index.html', sync.reload)
-})
+  gulp.watch('src/**/*', ['js-watch']);
+  gulp.watch('src/**/*.css', sync.reload);
+  gulp.watch('app/index.html', sync.reload);
+});

@@ -38,9 +38,9 @@ class SearchBox extends React.Component {
       const searchResultsHeight = searchResults.offsetHeight;
       const totalScrolled = scrollTop + searchResultsHeight;
 
-      //user reached at bottom
+      // user reached at bottom
       if (totalScrolled >= bottomOfContent) {
-        //to avoid multiple requests
+        // to avoid multiple requests
         if (!this.state.loadingFlag && this.state.searchTerm) {
           this.setState({
             loadingFlag: true,
@@ -81,7 +81,7 @@ class SearchBox extends React.Component {
         });
       }
       queryData = $.param(queryData);
-      queryUrl = queryUrl + queryPath + '?' + queryData;
+      queryUrl = `${queryUrl}${queryPath}?${queryData}`;
 
       $.ajax({
         method: 'GET',
