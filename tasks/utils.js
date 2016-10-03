@@ -1,11 +1,9 @@
-'use strict';
+import { argv } from 'yargs';
 
-var argv = require('yargs').argv;
-
-exports.getEnvName = function () {
+export function getEnvName() {
   return argv.env || 'development';
-};
+}
 
-exports.beepSound = function () {
+export function beepSound() {
   process.stdout.write('\u0007');
-};
+}

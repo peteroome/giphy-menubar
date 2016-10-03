@@ -1,13 +1,13 @@
-const gulp = require('gulp');
-const del = require('del');
-const dotenvToJson = require('gulp-dotenv-to-json');
-const watch = require('gulp-watch');
-const batch = require('gulp-batch');
-const merge = require('gulp-merge-json');
-const plumber = require('gulp-plumber');
-const jetpack = require('fs-jetpack');
-const bundle = require('./bundle');
-const utils = require('./utils');
+import gulp from 'gulp';
+import del from 'del';
+import dotenvToJson from 'gulp-dotenv-to-json';
+import watch from 'gulp-watch';
+import batch from 'gulp-batch';
+import merge from 'gulp-merge-json';
+import plumber from 'gulp-plumber';
+import jetpack from 'fs-jetpack';
+import bundle from './bundle';
+import { getEnvName, beepSound } from './utils';
 
 const srcDir = jetpack.cwd('./src');
 const destDir = jetpack.cwd('./app');
@@ -25,7 +25,7 @@ gulp.task('clean', () => {
 });
 
 gulp.task('environment', ['clean'], () => {
-  const configFile = `config/env_${utils.getEnvName()}.json`;
+  const configFile = `config/env_${getEnvName()}.json`;
   const privateConfigFile = '/tmp/env_private.json';
 
   // Get env vars from .env
@@ -54,7 +54,7 @@ gulp.task('css', () => {
 gulp.task('watch', () => {
   const beepOnError = done => (err) => {
     if (err) {
-      utils.beepSound();
+      beepSound();
     }
     done(err);
   };
