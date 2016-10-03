@@ -56,9 +56,9 @@ gulp.task('environment', ['clean'], () => {
 });
 
 // Watching…
-gulp.task('js-watch', ['copy:server', 'transpile'], () => sync.reload());
-gulp.task('html-watch', ['copy:html'], () => sync.reload());
-gulp.task('css-watch', ['copy:css'], () => sync.reload());
+gulp.task('js:watch', ['copy:server', 'transpile'], () => sync.reload());
+gulp.task('html:watch', ['copy:html'], () => sync.reload());
+gulp.task('css:watch', ['copy:css'], () => sync.reload());
 
 gulp.task('watch', () => {
   const beepOnError = done => (err) => {
@@ -69,7 +69,7 @@ gulp.task('watch', () => {
   };
 
   watch('src/**/*.js', batch((events, done) => {
-    gulp.start('js-watch', beepOnError(done));
+    gulp.start('js:watch', beepOnError(done));
   }));
 
   watch('src/**/*.html', batch((events, done) => {
