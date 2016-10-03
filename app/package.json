@@ -7,8 +7,6 @@
   "license": "ISC",
   "homepage": "https://github.com/coolbox/giphy-menubar#readme",
   "dependencies": {
-    "heap-api": "^1.0.1",
-    "menubar": "^5.1.0",
     "react": "^15.3.1",
     "react-dom": "^15.0.1",
     "react-masonry-component": "^4.2.1"

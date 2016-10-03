@@ -1,30 +1,29 @@
-// require('./tasks/build_app');
+require('./tasks/build_app');
 
-import gulp from 'gulp';
-import eslint from 'gulp-eslint';
-import browserSync from 'browser-sync';
-import { bundle } from './tasks/build_app';
-
-const sync = browserSync.create();
-
-gulp.task('default', ['transpile']);
-
-gulp.task('transpile', ['lint'], () => bundle);
-
-gulp.task('lint', () => {
-  gulp.src(['./src/**/*.js', '!node_modules/**'])
-    .pipe(eslint())
-    .pipe(eslint.format());
-});
-
-gulp.task('serve', ['transpile'], () => sync.init({ server: 'public' }));
-gulp.task('js-watch', ['transpile'], () => sync.reload());
-
-gulp.task('watch', ['serve'], () => {
-  gulp.watch('src/**/*', ['js-watch']);
-  gulp.watch('src/**/*.css', sync.reload);
-  gulp.watch('app/index.html', sync.reload);
-});
+// import gulp from 'gulp';
+// import eslint from 'gulp-eslint';
+// import browserSync from 'browser-sync';
+// import { bundle } from './tasks/build_app';
+//
+// const sync = browserSync.create();
+//
+// gulp.task('default', ['transpile']);
+//
+// gulp.task('transpile', ['lint'], () => bundle);
+//
+// gulp.task('lint', () => {
+//   gulp.src(['./src/**/*.js', '!node_modules/**'])
+//     .pipe(eslint())
+//     .pipe(eslint.format());
+// });
+//
+// gulp.task('js-watch', ['transpile'], () => sync.reload());
+//
+// gulp.task('watch', ['serve'], () => {
+//   gulp.watch('src/**/*', ['js-watch']);
+//   gulp.watch('src/**/*.css', sync.reload);
+//   gulp.watch('app/index.html', sync.reload);
+// });
 
 
 // 'use strict';
