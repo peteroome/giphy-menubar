@@ -102,4 +102,4 @@ gulp.task('copy:server', () => {
     .pipe(gulp.dest(destDir.path('.')));
 });
 
-gulp.task('build', ['transpile', 'environment', 'copy', 'watch']);
+gulp.task('build', ['transpile', 'environment', 'copy']);

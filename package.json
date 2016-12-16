@@ -5,7 +5,7 @@
     "test": "mocha --require ./test/helpers/setup.js --recursive --compilers js:babel-register test/**/*.spec.js --require chai --reporter nyan",
     "test-watch": "npm test -- --watch",
     "lint": "eslint app test *.js",
-    "start": "npm install && electron ./app",
+    "start": "gulp start",
     "compile": "rimraf app/out && tsc",
     "build": "gulp build",
     "pack": "npm run compile && build --dir",

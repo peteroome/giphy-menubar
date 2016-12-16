@@ -1,4 +1,5 @@
-require('./tasks/build_app');
+import './tasks/build_app';
+import './tasks/start';
 
 // import gulp from 'gulp';
 // import eslint from 'gulp-eslint';

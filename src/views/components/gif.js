@@ -1,5 +1,7 @@
 import React from 'react';
 
+const clipboard = window.clipboard || {};
+
 class Gif extends React.Component {
   constructor(props) {
     super(props);
@@ -50,15 +52,19 @@ class Gif extends React.Component {
 
   render() {
     return (
-      <img
-        width={this.image.width}
-        height={this.image.height}
-        src={this.image.url}
-        alt={this.image.caption}
+      <a
+        href={this.image.url}
         onMouseOver={this.handleMouseOver}
         onMouseOut={this.handleMouseOut}
         onClick={this.handleClick}
-      />
+      >
+        <img
+          width={this.image.width}
+          height={this.image.height}
+          src={this.image.url}
+          alt={this.image.caption}
+        />
+      </a>
     );
   }
 }
