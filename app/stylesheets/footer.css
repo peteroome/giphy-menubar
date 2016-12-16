@@ -1,0 +1,33 @@
+footer {
+  position: fixed;
+  bottom: 8px;
+  width: calc(100% - 20px)
+}
+
+footer p {
+  text-align: center;
+}
+
+a.nav__pete {
+  position: relative;
+}
+
+a.nav__pete:hover {
+  cursor: pointer;
+}
+
+a.nav__pete svg {
+  position: relative;
+  top: 1px;
+  transform: scale3d(1,1,1);
+}
+
+a.nav__trending,
+a.nav__pete svg path {
+  transition: 125ms;
+  transition-timing-function: ease-in-out;
+}
+
+a.nav__pete:hover svg path {
+  fill: rgba(248,74,89,1);
+}
