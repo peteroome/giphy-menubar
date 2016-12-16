@@ -26,7 +26,8 @@ const menuOptions = {
   minimizable: false,
   maximizable: false,
   fullscreenable: false,
-  autoHideMenuBar: true
+  autoHideMenuBar: true,
+  index: `file://${path.join(__dirname, 'index.html')}`
 };
 
 if (process.env.NODE_ENV === 'development') {
