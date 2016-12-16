@@ -8,7 +8,7 @@ const { Menu } = require('electron');
 require('electron-reload')(__dirname);
 
 // Analytics
-const heap = require('heap-api')(env.HEAP_APP_ID);
+const heap = require('heap-api')(env.heap_app_id);
 
 // Menubar
 const menubar = require('menubar');
@@ -20,7 +20,7 @@ const menuOptions = {
   transparent: true,
   frame: false,
   alwaysOnTop: false,
-  icon: path.join(__dirname, 'public/assets/images', 'Icon.png'),
+  icon: path.join(__dirname, './images', 'Icon.png'),
   resizable: false,
   movable: false,
   minimizable: false,
@@ -29,7 +29,7 @@ const menuOptions = {
   autoHideMenuBar: true
 };
 
-if (env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development') {
   menuOptions.alwaysOnTop = true;
 }
 
@@ -56,7 +56,7 @@ menu.on('ready', () => {
 
 menu.on('show', () => {
   heap.track('menubar:show');
-  menu.tray.setImage(path.join(__dirname, 'public/assets/images', 'IconPressed.png'));
+  menu.tray.setImage(path.join(__dirname, './images', 'IconPressed.png'));
 });
 
 menu.on('after-create-window', () => {
@@ -67,5 +67,5 @@ menu.on('after-create-window', () => {
 
 menu.on('hide', () => {
   heap.track('menubar:hide');
-  menu.tray.setImage(path.join(__dirname, 'public/assets/images', 'Icon.png'));
+  menu.tray.setImage(path.join(__dirname, './images', 'Icon.png'));
 });

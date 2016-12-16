@@ -69,9 +69,9 @@ class SearchBox extends React.Component {
   fetchGifs() {
     // Don't pound the API if we didn't get any results.
     if (this.state.lastResultsCount !== 0) {
-      let queryUrl = env.GIPHY_URL;
+      let queryUrl = env.giphy_url;
       let queryPath = '/trending';
-      let queryData = { api_key: env.GIPHY_API_KEY };
+      let queryData = { api_key: env.giphy_api_key };
 
       if (this.state.searchTerm && this.state.searchTerm.length > 0) {
         queryPath = '/search';

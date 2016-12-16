@@ -1,7 +1,7 @@
 node_modules
 .DS_Store
 Thumbs.db
-.env
+/src/env.json
 /config/env_private.json
 *.log
 

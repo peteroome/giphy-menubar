@@ -1,5 +1,5 @@
 {
-  "main": "bootstrapper.js",
+  "main": "src/bootstrapper.js",
   "private": true,
   "scripts": {
     "postinstall": "install-app-deps",
@@ -7,7 +7,7 @@
     "test-watch": "npm test -- --watch",
     "lint": "eslint app test *.js",
     "start": "gulp start",
-    "dev": "electron .",
+    "dev": "NODE_ENV=development electron .",
     "compile": "rimraf app/out && tsc",
     "build": "gulp build",
     "pack": "npm run compile && build --dir",
