@@ -19,7 +19,8 @@ const sync = browserSync.create();
 // Bundling JS
 gulp.task('transpile', ['lint'], () => {
   Promise.all([
-    bundle(srcDir.path('app.js'), destDir.path('app.js'))
+    bundle(srcDir.path('app.js'), destDir.path('app.js')),
+    bundle(srcDir.path('server.js'), destDir.path('server.js'))
   ]);
 });
 
