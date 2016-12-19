@@ -11,6 +11,10 @@ class App extends React.Component {
     this.checkOnline = this.checkOnline.bind(this);
   }
 
+  isOnline() {
+    return this.navigator.onLine;
+  }
+
   checkOnline(event) {
     event.preventDefault();
     this.forceUpdate();

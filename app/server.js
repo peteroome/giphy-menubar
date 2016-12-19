@@ -66926,7 +66926,7 @@ _reactDom2.default.render(_react2.default.createElement(_app2.default, null), do
 });
 
 },{"./views/components/app":447,"react":415,"react-dom":271}],446:[function(require,module,exports){
-(function (__dirname){
+(function (process,__dirname){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -66940,12 +66940,15 @@ var _fsJetpack2 = _interopRequireDefault(_fsJetpack);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // The variables have been written to `env.json` by the build process.
-var env = _fsJetpack2.default.cwd(__dirname).read('env.json', 'json'); // Simple wrapper exposing environment variables to rest of the code.
-exports.default = env;
+var env = _fsJetpack2.default.cwd(__dirname).read('./env.json', 'json'); // Simple wrapper exposing environment variables to rest of the code.
 
-}).call(this,"/src")
+var nodeEnv = process.env.NODE_ENV || 'development';
 
-},{"fs-jetpack":220}],447:[function(require,module,exports){
+exports.default = env[nodeEnv];
+
+}).call(this,require('_process'),"/src")
+
+},{"_process":262,"fs-jetpack":220}],447:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -67446,9 +67449,9 @@ var SearchBox = function (_React$Component) {
 
       // Don't pound the API if we didn't get any results.
       if (this.state.lastResultsCount !== 0) {
-        var queryUrl = _env2.default.GIPHY_URL;
+        var queryUrl = _env2.default.giphy_url;
         var queryPath = '/trending';
-        var queryData = { api_key: _env2.default.GIPHY_API_KEY };
+        var queryData = { api_key: _env2.default.giphy_api_key };
 
         if (this.state.searchTerm && this.state.searchTerm.length > 0) {
           queryPath = '/search';

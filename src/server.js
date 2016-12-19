@@ -1,6 +1,6 @@
 import env from './env';
 
-require('babel-register');
+// require('babel-register');
 
 const path = require('path');
 

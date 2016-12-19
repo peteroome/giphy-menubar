@@ -1,7 +1,5 @@
 import React from 'react';
 
-const clipboard = window.clipboard || {};
-
 class Gif extends React.Component {
   constructor(props) {
     super(props);
@@ -9,6 +7,8 @@ class Gif extends React.Component {
     this.state = {
       hd: false
     };
+
+    this.clipboard = window.clipboard || {};
 
     this.handleClick = this.handleClick.bind(this);
     this.handleMouseOver = this.handleMouseOver.bind(this);
@@ -70,7 +70,7 @@ class Gif extends React.Component {
 }
 
 Gif.propTypes = {
-  giphyObject: React.PropTypes.shape
+  giphyObject: React.PropTypes.object
 };
 
 export default Gif;

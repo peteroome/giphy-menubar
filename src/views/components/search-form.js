@@ -4,15 +4,6 @@ import jQuery from 'jquery';
 const $ = jQuery;
 
 class SearchForm extends React.Component {
-  static scrollResultsToTop() {
-    const $searchResults = $('.search-results')[0];
-
-    if ($searchResults) {
-      $('.search-results').animate({ scrollTop: 0 }, 100);
-      return false;
-    }
-  }
-
   constructor(props) {
     super(props);
 
@@ -26,6 +17,15 @@ class SearchForm extends React.Component {
 
   componentDidUpdate() {
     this.search.focus();
+  }
+
+  scrollResultsToTop() {
+    const $searchResults = $('.search-results')[0];
+
+    if ($searchResults) {
+      $('.search-results').animate({ scrollTop: 0 }, 100);
+      return false;
+    }
   }
 
   handleSubmit(event) {
@@ -44,7 +44,7 @@ class SearchForm extends React.Component {
               ref={(c) => { this.search = c; }}
             />
             <button type="submit">
-              <img src="./src/images/icons/ic_search_white_36px.svg" alt="Search" />
+              <img src="images/icons/ic_search_white_36px.svg" alt="Search" />
             </button>
           </fieldset>
         </form>

@@ -11,8 +11,9 @@ class SearchResultsLineItem extends React.Component {
   }
 }
 
+// Expect a gif object supplied by the Giphy API
 SearchResultsLineItem.propTypes = {
-  gif: React.PropTypes.instanceOf(Gif)
+  gif: React.PropTypes.object
 };
 
 export default SearchResultsLineItem;
