@@ -8,7 +8,7 @@ import batch from 'gulp-batch';
 import merge from 'gulp-merge-json';
 import plumber from 'gulp-plumber';
 import jetpack from 'fs-jetpack';
-import bundle from './bundleNEW';
+import bundle from './bundle';
 import { getEnvName, beepSound } from './utils';
 
 const srcDir = jetpack.cwd('./src');
@@ -19,8 +19,8 @@ const sync = browserSync.create();
 // Bundling JS
 gulp.task('transpile', ['lint'], () => {
   Promise.all([
-    bundle(srcDir.path('index.js'), destDir.path('index.js')),
-    bundle(srcDir.path('server.js'), destDir.path('server.js'))
+    bundle(srcDir.path('bootstrapper.js'), destDir.path('bootstrapper.js')),
+    bundle(srcDir.path('index.js'), destDir.path('index.js'))
   ]);
 });
 
@@ -57,7 +57,7 @@ gulp.task('environment', ['clean'], () => {
 });
 
 // Watching…
-gulp.task('js:watch', ['copy:server', 'transpile'], () => sync.reload());
+gulp.task('js:watch', ['transpile'], () => sync.reload());
 gulp.task('html:watch', ['copy:html'], () => sync.reload());
 gulp.task('css:watch', ['copy:css'], () => sync.reload());
 
@@ -95,12 +95,6 @@ gulp.task('copy:css', () => {
   gulp.src(srcDir.path('stylesheets/*.css'))
     .pipe(plumber())
     .pipe(gulp.dest(destDir.path('stylesheets')));
-});
-
-gulp.task('copy:server', () => {
-  gulp.src(srcDir.path('server.js'))
-    .pipe(plumber())
-    .pipe(gulp.dest(destDir.path('.')));
 });
 
 gulp.task('build', ['transpile', 'environment', 'copy']);

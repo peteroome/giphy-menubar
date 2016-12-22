@@ -1,14 +1,6 @@
-import env from './env';
-
-// require('babel-register');
-
 const path = require('path');
 
 const { Menu } = require('electron');
-require('electron-reload')(__dirname);
-
-// Analytics
-const heap = require('heap-api')(env.heap_app_id);
 
 // Menubar
 const menubar = require('menubar');
@@ -51,12 +43,10 @@ function initTray(tray) {
 }
 
 menu.on('ready', () => {
-  heap.track('menubar:ready');
   initTray(menu.tray);
 });
 
 menu.on('show', () => {
-  heap.track('menubar:show');
   menu.tray.setImage(path.join(__dirname, './images', 'IconPressed.png'));
 });
 
@@ -67,6 +57,5 @@ menu.on('after-create-window', () => {
 });
 
 menu.on('hide', () => {
-  heap.track('menubar:hide');
   menu.tray.setImage(path.join(__dirname, './images', 'Icon.png'));
 });

@@ -3,7 +3,7 @@ const electron = require('electron');
 const gulp = require('gulp');
 
 gulp.task('start', ['build', 'watch'], () => {
-  childProcess.spawn(electron, ['./app'], {
+  childProcess.spawn(electron, ['.'], {
     stdio: 'inherit'
   })
   .on('close', () => {

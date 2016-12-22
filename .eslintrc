@@ -16,7 +16,7 @@
     "react/jsx-no-bind": 0,
     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx"] }],
     "react/prefer-stateless-function": 0,
-    "react/forbid-prop-types": [<enabled>, { "forbid": ['any', 'array'] }]
+    "react/forbid-prop-types": [1, { "forbid": ['any', 'array'] }],
     # https://github.com/eslint/eslint/issues/6274
     "generator-star-spacing": 0
   },

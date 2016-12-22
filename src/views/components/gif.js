@@ -1,5 +1,9 @@
 import React from 'react';
 
+const electron = window.require('electron');
+const remote = electron.remote;
+const clipboard = remote.clipboard;
+
 class Gif extends React.Component {
   constructor(props) {
     super(props);

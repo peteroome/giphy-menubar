@@ -1,16 +1,12 @@
 import React from 'react';
 
+const electron = window.require('electron');
+const shell = electron.shell;
+
 class Footer extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.openExternalLink = this.openExternalLink.bind(this);
-  }
-
-  openExternalLink(event) {
+  static openExternalLink(event) {
     event.preventDefault();
     const href = event.currentTarget.href;
-    const shell = window.shell || {};
     shell.openExternal(href);
   }
 

@@ -1,8 +1,5 @@
-// Simple wrapper exposing environment variables to rest of the code.
-import jetpack from 'fs-jetpack';
+const env = require('./env.json');
 
-// The variables have been written to `env.json` by the build process.
-const env = jetpack.cwd(__dirname).read('./env.json', 'json');
 const nodeEnv = process.env.NODE_ENV || 'development';
 
 export default env[nodeEnv];
