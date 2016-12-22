@@ -1,44 +1,51 @@
-import gulp from 'gulp';
-import browserify from 'browserify';
-import source from 'vinyl-source-stream';
-import buffer from 'vinyl-buffer';
-import exorcist from 'exorcist';
-import watchify from 'watchify';
-import babelify from 'babelify';
-import uglify from 'gulp-uglify';
-import ifElse from 'gulp-if-else';
-import path from 'path';
+const path = require('path');
+const jetpack = require('fs-jetpack');
+const rollup = require('rollup').rollup;
 
-// Input file.
-watchify.args.debug = true;
-const bundler = browserify(watchify.args);
+const nodeBuiltInModules = ['assert', 'buffer', 'child_process', 'cluster',
+    'console', 'constants', 'crypto', 'dgram', 'dns', 'domain', 'events',
+    'fs', 'http', 'https', 'module', 'net', 'os', 'path', 'process', 'punycode',
+    'querystring', 'readline', 'repl', 'stream', 'string_decoder', 'timers',
+    'tls', 'tty', 'url', 'util', 'v8', 'vm', 'zlib'];
 
-// Babel transform
-bundler.transform(
-  babelify.configure({
-    sourceMapRelative: 'app'
+const electronBuiltInModules = ['electron'];
+
+const generateExternalModulesList = () => {
+  const appManifest = jetpack.read('./package.json', 'json');
+  return [].concat(
+    nodeBuiltInModules,
+    electronBuiltInModules,
+    Object.keys(appManifest.dependencies),
+    Object.keys(appManifest.devDependencies)
+  );
+};
+
+const cached = {};
+
+module.exports = (src, dest, options) => {
+  const opts = options || {};
+  opts.rollupPlugins = opts.rollupPlugins || [];
+  return rollup({
+    entry: src,
+    external: generateExternalModulesList(),
+    cache: cached[src],
+    plugins: opts.rollupPlugins,
   })
-);
+  .then((bundle) => {
+    cached[src] = bundle;
 
-function bundle(src, dest) {
-  const jsFile = path.basename(dest);
-  const destPath = path.dirname(dest);
-  const mapFile = `${dest}.map`;
-
-  bundler.add(src, bundle);
-  bundler.bundle()
-    .on('error', (error) => {
-      console.error('\nError: ', error, '\n');
-      bundler.emit('end');
-    })
-    .pipe(exorcist(mapFile))
-    .pipe(source(jsFile))
-    .pipe(buffer())
-    .pipe(ifElse(process.env.NODE_ENV === 'production', uglify))
-    .pipe(gulp.dest(destPath));
-}
-
-// On updates recompile
-bundler.on('update', bundle);
-
-export default bundle;
+    const jsFile = path.basename(dest);
+    const result = bundle.generate({
+      format: 'cjs',
+      sourceMap: true,
+      sourceMapFile: jsFile,
+    });
+    // Wrap code in self invoking function so the variables don't
+    // pollute the global namespace.
+    const isolatedCode = `(function () {${result.code}\n}());`;
+    return Promise.all([
+      jetpack.writeAsync(dest, `${isolatedCode}\n//# sourceMappingURL=${jsFile}.map`),
+      jetpack.writeAsync(`${dest}.map`, result.map.toString()),
+    ]);
+  });
+};
