@@ -6,4 +6,4 @@ Thumbs.db
 *.log
 
 # ignore everything in 'app' folder that has been generated from 'src' folder
-/app/*
+/dist/*
