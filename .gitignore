@@ -2,8 +2,5 @@ node_modules
 .DS_Store
 Thumbs.db
 /src/env.json
-/config/env_private.json
 *.log
-
-# ignore everything in 'app' folder that has been generated from 'src' folder
 /dist/*
