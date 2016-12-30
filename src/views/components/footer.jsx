@@ -4,10 +4,9 @@ const electron = window.require('electron');
 const shell = electron.shell;
 
 class Footer extends React.Component {
-  static openExternalLink(event) {
+  static openExternalLink() {
     event.preventDefault();
-    const href = event.currentTarget.href;
-    shell.openExternal(href);
+    shell.openExternal('http://peteroo.me');
   }
 
   render() {
@@ -15,7 +14,7 @@ class Footer extends React.Component {
       <footer>
         <div className="right-side">
           <p>
-            <a onClick={this.openExternalLink} className="nav__pete" href="http://peteroo.me">
+            <a onClick={Footer.openExternalLink} className="nav__pete">
               <svg
                 width="25px"
                 height="14px"
