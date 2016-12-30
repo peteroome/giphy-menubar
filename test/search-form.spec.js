@@ -14,14 +14,12 @@ describe('SearchForm', () => {
 
   const component = shallow(
     <SearchForm
-      currentSearchTerm={'puppy'}
       newSearch={newSearch}
     />
   );
 
   const mountComponent = mount(
     <SearchForm
-      currentSearchTerm={'puppy'}
       newSearch={newSearch}
     />
   );

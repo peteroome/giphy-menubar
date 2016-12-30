@@ -11,29 +11,29 @@ class App extends React.Component {
     this.checkOnline = this.checkOnline.bind(this);
   }
 
-	render() {
-    let appComponent;
-    if (this.isOnline()) {
-      appComponent = <SearchBox />;
-    } else {
-      appComponent = <Offline tryAgain={this.checkOnline} />
-    }
-
-    return(
-      <div className="app">
-        {appComponent}
-        <Footer />
-      </div>
-    );
-  }
-
   isOnline() {
-    return navigator.onLine ? true : false;
+    return this.navigator.onLine;
   }
 
   checkOnline(event) {
     event.preventDefault();
     this.forceUpdate();
+  }
+
+  render() {
+    let appComponent;
+    if (navigator.onLine) {
+      appComponent = <SearchBox />;
+    } else {
+      appComponent = <Offline tryAgain={this.checkOnline} />;
+    }
+
+    return (
+      <div className="app">
+        {appComponent}
+        <Footer />
+      </div>
+    );
   }
 }
 

@@ -23,7 +23,7 @@ describe('Offline', () => {
       var button = component.find('button');
       expect(button.length).to.equal(1);
       expect(button.contains(
-        <img src="public/assets/images/icons/ic_refresh_white_36px.svg" alt="Refresh"/>
+        <img src="./src/images/icons/ic_refresh_white_36px.svg" alt="Refresh"/>
       )).to.equal(true);
     });
 

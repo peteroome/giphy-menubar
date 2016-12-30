@@ -22,3 +22,6 @@ https://github.com/maxogden/menubar
 - https://blog.dcpos.ch/how-to-make-your-electron-app-sexy
 
 - https://nulab-inc.com/blog/typetalk/3-necessary-things-to-correctly-release-a-product-based-on-the-electron-app/
+
+## Env vars
+- http://himanshu.gilani.info/blog/2012/09/26/bootstraping-a-node-dot-js-app-for-dev-slash-prod-environment/
