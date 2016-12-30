@@ -31,10 +31,9 @@ menu.on('show', () => {
 });
 
 menu.on('after-create-window', () => {
-  // if (process.env.NODE_ENV === 'development') {
-  //   menu.window.openDevTools();
-  // }
-  menu.window.openDevTools();
+  if (process.env.NODE_ENV === 'development') {
+    menu.window.openDevTools();
+  }
 });
 
 menu.on('hide', () => {
