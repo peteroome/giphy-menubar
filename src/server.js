@@ -1,7 +1,5 @@
 const path = require('path');
 
-const { Menu } = require('electron');
-
 // Menubar
 const menubar = require('menubar');
 
@@ -27,24 +25,6 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const menu = menubar(menuOptions);
-
-function initTray(tray) {
-  tray.on('right-click', () => {
-    const contextMenu = Menu.buildFromTemplate([
-      {
-        label: 'Quit',
-        accelerator: 'Command+Q',
-        selector: 'terminate:',
-      }
-    ]);
-    tray.setToolTip('This is my application.');
-    tray.setContextMenu(contextMenu);
-  });
-}
-
-menu.on('ready', () => {
-  initTray(menu.tray);
-});
 
 menu.on('show', () => {
   menu.tray.setImage(path.join(__dirname, './images', 'IconPressed.png'));
