@@ -1,4 +1,10 @@
 import React from 'react';
+import env from './../../env';
+
+// Analytics
+const ReactGA = require('react-ga');
+
+ReactGA.initialize(env.ga_ua_id);
 
 const electron = window.require('electron');
 const remote = electron.remote;
@@ -27,8 +33,12 @@ class Gif extends React.Component {
     event.preventDefault();
     clipboard.writeText(this.copyUrl);
     new Notification('Giphy!', {
-      title: 'Hello world',
       body: 'URL copied 🎉'
+    });
+
+    ReactGA.event({
+      category: 'Gif',
+      action: 'Clicked',
     });
   }
 

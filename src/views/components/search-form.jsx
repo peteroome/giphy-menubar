@@ -1,7 +1,13 @@
 import React from 'react';
 import jQuery from 'jquery';
+import env from './../../env';
 
 const $ = jQuery;
+
+// Analytics
+const ReactGA = require('react-ga');
+
+ReactGA.initialize(env.ga_ua_id);
 
 class SearchForm extends React.Component {
   static scrollResultsToTop() {
@@ -30,6 +36,12 @@ class SearchForm extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     this.props.newSearch(this.search.value, this.scrollResultsToTop);
+
+    ReactGA.event({
+      category: 'Form',
+      action: 'Search',
+      label: this.search.value
+    });
   }
 
   render() {
