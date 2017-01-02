@@ -12,12 +12,20 @@ class Footer extends React.Component {
   render() {
     return (
       <footer>
-        <div className="right-side">
+        <div>
+          <img
+            src="./images/PoweredBy_200_Horizontal_Light-Backgrounds_With_Logo.gif"
+            alt="Powered by Giphy"
+            width="100"
+            height="21"
+          />
+        </div><div>
           <p>
+            Built by
             <a onClick={Footer.openExternalLink} className="nav__pete">
               <svg
-                width="25px"
-                height="14px"
+                width="20px"
+                height="11px"
                 viewBox="0 0 25 14"
                 version="1.1"
                 xmlns="http://www.w3.org/2000/svg"

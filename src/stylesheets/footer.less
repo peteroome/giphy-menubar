@@ -1,7 +1,30 @@
 footer {
   position: fixed;
-  bottom: 8px;
+  bottom: 2px;
   width: 95%;
+}
+
+footer div {
+  display: inline-block;
+  height: 24px;
+  width: 50%;
+  vertical-align: middle;
+}
+
+footer div:first-child {
+  text-align: left;
+}
+
+footer div:last-child {
+  text-align: right;
+
+  p {
+    display: inline-block;
+    font-size: 8px;
+    text-transform: uppercase;
+    font-family: monospace;
+    margin-top: 2px;
+  }
 }
 
 footer p {
@@ -10,6 +33,7 @@ footer p {
 
 a.nav__pete {
   position: relative;
+  margin-left: 6px;
 }
 
 a.nav__pete:hover {
@@ -18,7 +42,7 @@ a.nav__pete:hover {
 
 a.nav__pete svg {
   position: relative;
-  top: 1px;
+  top: 3px;
   transform: scale3d(1,1,1);
 }
 
