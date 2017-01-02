@@ -1,7 +1,7 @@
 {
-  "name": "Giphy",
-  "productName": "Giphy",
-  "description": "A minimal Giphy menubar application",
+  "name": "GifBar",
+  "productName": "Gif Bar",
+  "description": "A minimal Giphy menubar app",
   "version": "0.0.1",
   "author": "Pete Roome <pete.roome@gmail.com> (http://peteroome.com/)",
   "copyright": "© 2016, Pete Roome",
