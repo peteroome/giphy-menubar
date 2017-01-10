@@ -19,6 +19,10 @@ class SearchForm extends React.Component {
     }
   }
 
+  static handleFocus(event) {
+    event.target.select();
+  }
+
   constructor(props) {
     super(props);
 
@@ -53,6 +57,7 @@ class SearchForm extends React.Component {
               name="search"
               placeholder="Search"
               ref={(c) => { this.search = c; }}
+              onFocus={this.handleFocus}
             />
             <button type="submit">
               <img src="images/icons/ic_search_white_36px.svg" alt="Search" />
