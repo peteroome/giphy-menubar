@@ -1,8 +1,12 @@
 import React from 'react';
+import { HotKeys } from 'react-hotkeys';
 import jQuery from 'jquery';
 import env from './../../env';
 
 const $ = jQuery;
+const electron = window.require('electron');
+const remote = electron.remote;
+const clipboard = remote.clipboard;
 
 // Analytics
 const ReactGA = require('react-ga');
@@ -19,13 +23,10 @@ class SearchForm extends React.Component {
     }
   }
 
-  static handleFocus(event) {
-    event.target.select();
-  }
-
   constructor(props) {
     super(props);
 
+    this.state = { value: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -35,6 +36,21 @@ class SearchForm extends React.Component {
 
   componentDidUpdate() {
     this.search.focus();
+  }
+
+  selectAll(event) {
+    event.target.select();
+  }
+
+  paste(event) {
+    event.preventDefault();
+    const searchInput = event.target;
+    searchInput.value = clipboard.readText();
+  }
+
+  copy(event) {
+    event.preventDefault();
+    clipboard.writeText(event.target.value);
   }
 
   handleSubmit(event) {
@@ -49,22 +65,29 @@ class SearchForm extends React.Component {
   }
 
   render() {
+    const keyboardShortcuthandlers = {
+      selectAll: this.selectAll,
+      paste: this.paste,
+      copy: this.copy
+    };
+
     return (
-      <div className="form-holder">
-        <form className="search-form" onSubmit={this.handleSubmit}>
-          <fieldset>
-            <input
-              name="search"
-              placeholder="Search"
-              ref={(c) => { this.search = c; }}
-              onFocus={this.handleFocus}
-            />
-            <button type="submit">
-              <img src="images/icons/ic_search_white_36px.svg" alt="Search" />
-            </button>
-          </fieldset>
-        </form>
-      </div>
+      <HotKeys handlers={keyboardShortcuthandlers}>
+        <div className="form-holder">
+          <form className="search-form" onSubmit={this.handleSubmit}>
+            <fieldset>
+              <input
+                name="search"
+                placeholder="Search"
+                ref={(c) => { this.search = c; }}
+              />
+              <button type="submit">
+                <img src="images/icons/ic_search_white_36px.svg" alt="Search" />
+              </button>
+            </fieldset>
+          </form>
+        </div>
+      </HotKeys>
     );
   }
 }

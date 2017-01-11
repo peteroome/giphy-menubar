@@ -2,7 +2,7 @@
   "name": "GifBar",
   "productName": "Gif Bar",
   "description": "A minimal Giphy menubar app",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "Pete Roome <pete.roome@gmail.com> (http://peteroome.com/)",
   "copyright": "© 2016, Pete Roome",
   "homepage": "http://peteroome.com",
@@ -21,6 +21,7 @@
     "react": "^15.3.1",
     "react-dom": "^15.0.1",
     "react-ga": "^2.1.2",
+    "react-hotkeys": "^0.9.0",
     "react-masonry-component": "^4.2.1"
   },
   "devDependencies": {

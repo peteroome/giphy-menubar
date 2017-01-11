@@ -26,14 +26,15 @@ if (process.env.NODE_ENV === 'development') {
 
 const menu = menubar(menuOptions);
 
-menu.on('show', () => {
-  menu.tray.setImage(path.join(__dirname, './images', 'IconPressed.png'));
-});
-
 menu.on('after-create-window', () => {
+  menu.window.openDevTools();
   if (process.env.NODE_ENV === 'development') {
     menu.window.openDevTools();
   }
+});
+
+menu.on('show', () => {
+  menu.tray.setImage(path.join(__dirname, './images', 'IconPressed.png'));
 });
 
 menu.on('hide', () => {

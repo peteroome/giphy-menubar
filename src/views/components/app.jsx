@@ -1,7 +1,14 @@
 import React from 'react';
+import { HotKeys } from 'react-hotkeys';
 import SearchBox from './search-box';
 import Offline from './offline';
 import Footer from './footer';
+
+const map = {
+  selectAll: 'command+a',
+  paste: 'command+v',
+  copy: 'command+c'
+};
 
 class App extends React.Component {
   constructor(props) {
@@ -29,10 +36,12 @@ class App extends React.Component {
     }
 
     return (
-      <div className="app">
-        {appComponent}
-        <Footer />
-      </div>
+      <HotKeys keyMap={map}>
+        <div className="app">
+          {appComponent}
+          <Footer />
+        </div>
+      </HotKeys>
     );
   }
 }
