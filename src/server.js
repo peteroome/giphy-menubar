@@ -1,4 +1,11 @@
 const path = require('path');
+const { globalShortcut } = require('electron');
+const keyboardShortcuts = {
+  open: 'CommandOrControl+Shift+g',
+  close: 'CommandOrControl+Shift+g'
+};
+
+let isShown = false;
 
 // Menubar
 const menubar = require('menubar');
@@ -27,10 +34,17 @@ if (process.env.NODE_ENV === 'development') {
 const menu = menubar(menuOptions);
 
 menu.on('after-create-window', () => {
-  menu.window.openDevTools();
   if (process.env.NODE_ENV === 'development') {
     menu.window.openDevTools();
   }
+
+  globalShortcut.register(keyboardShortcuts.open, () => {
+    if (isShown) {
+      menu.hideWindow();
+    } else {
+      menu.showWindow();
+    }
+  });
 });
 
 menu.on('show', () => {
@@ -40,3 +54,8 @@ menu.on('show', () => {
 menu.on('hide', () => {
   menu.tray.setImage(path.join(__dirname, './images', 'Icon.png'));
 });
+
+menu
+  .on('after-show', () => (isShown = true))
+  .on('after-hide', () => (isShown = false))
+  .on('focus-lost', () => (isShown = false));
