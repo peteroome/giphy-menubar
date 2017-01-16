@@ -24,7 +24,8 @@ const menuOptions = {
   maximizable: false,
   fullscreenable: false,
   autoHideMenuBar: true,
-  index: `file://${path.join(__dirname, 'index.html')}`
+  index: `file://${path.join(__dirname, 'index.html')}`,
+  preloadWindow: true
 };
 
 if (process.env.NODE_ENV === 'development') {
