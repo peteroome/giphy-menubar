@@ -52,17 +52,23 @@ class SearchBox extends React.Component {
     }
   }
 
-  newSearch(query, callback = null) {
+  scrollResultsToTop() {
+    const $searchResults = $('.search-results')[0];
+
+    if ($searchResults) {
+      $('.search-results').animate({ scrollTop: 0 }, 200);
+      return false;
+    }
+  }
+
+  newSearch(query) {
     this.setState({
       searchTerm: query,
       offset: 0,
       lastResultsCount: -1
     }, () => {
       this.fetchGifs();
-
-      if (callback) {
-        callback();
-      }
+      this.scrollResultsToTop();
     });
   }
 

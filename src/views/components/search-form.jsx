@@ -14,15 +14,6 @@ const ReactGA = require('react-ga');
 ReactGA.initialize(env.ga_ua_id);
 
 class SearchForm extends React.Component {
-  static scrollResultsToTop() {
-    const $searchResults = $('.search-results')[0];
-
-    if ($searchResults) {
-      $('.search-results').animate({ scrollTop: 0 }, 100);
-      return false;
-    }
-  }
-
   constructor(props) {
     super(props);
 
@@ -55,7 +46,7 @@ class SearchForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.newSearch(this.search.value, this.scrollResultsToTop);
+    this.props.newSearch(this.search.value);
 
     ReactGA.event({
       category: 'Form',
