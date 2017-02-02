@@ -2,7 +2,7 @@
 An OS X menubar app for searching Giphy.
 
 ## Demo
-![Gif Bar demo](./src/gifs/demo.gif "Gif bar demo")
+![Gif Bar demo](http://giphy-menubar.s3.amazonaws.com/gifs/demo.gif "Gif bar demo")
 
 ## Download Demo
 This app currently doesn't have a product API key for Giphy, so it could stop working
