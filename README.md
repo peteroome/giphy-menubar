@@ -1,27 +1,20 @@
-# giphy-menubar
-A menubar app for searching Giphy
+# Gif Bar
+An OS X menubar app for searching Giphy.
 
-## Menu Bar
-https://github.com/maxogden/menubar
+## Demo
+![Gif Bar demo](./src/gifs/demo.gif "Gif bar demo")
 
-## Install stuff
+## Download Demo
+This app currently doesn't have a product API key for Giphy, so it could stop working
+at any moment. However, if you're cool with that, you can [download the app from here to take it for a spin](goo.gl/jOrQYicontent_copyCopy short URL
+).
+
+## Local setup
+### Install stuff
 `npm install`
 
-## Start the app
+### Start the app
 `npm run start`
 
-`npm run watch`
-
-`npm run test-watch`
-
-
-## To implement
-- https://heapanalytics.com/
-
-## Make your app sexy
-- https://blog.dcpos.ch/how-to-make-your-electron-app-sexy
-
-- https://nulab-inc.com/blog/typetalk/3-necessary-things-to-correctly-release-a-product-based-on-the-electron-app/
-
-## Env vars
-- http://himanshu.gilani.info/blog/2012/09/26/bootstraping-a-node-dot-js-app-for-dev-slash-prod-environment/
+### Package the app
+`npm run package`
