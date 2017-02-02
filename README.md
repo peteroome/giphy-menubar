@@ -18,3 +18,6 @@ at any moment. However, if you're cool with that, you can [download the app from
 
 ### Package the app
 `npm run package`
+
+#### Built by
+[Pete](http://www.peteroome.com/)
