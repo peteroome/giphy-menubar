@@ -8,8 +8,7 @@ An OS X menubar app for searching Giphy.
 
 ## Download Demo
 This app currently doesn't have a product API key for Giphy, so it could stop working
-at any moment. However, if you're cool with that, you can [download the app from here to take it for a spin](goo.gl/jOrQYicontent_copyCopy short URL
-).
+at any moment. However, if you're cool with that, you can [download the app from here to take it for a spin](https://goo.gl/YoDmgs).
 
 ## Local setup
 ### Install stuff
