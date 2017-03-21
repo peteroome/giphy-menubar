@@ -3,7 +3,10 @@ import Masonry from 'react-masonry-component';
 import SearchResultsLineItem from './search-results-line-item';
 
 const masonryOptions = {
-  transitionDuration: 0
+  transitionDuration: 0,
+  itemSelector: '.gif',
+  columnWidth: 200,
+  gutter: 8
 };
 
 class SearchResults extends React.Component {
