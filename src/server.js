@@ -12,7 +12,7 @@ const menubar = require('menubar');
 
 const menuOptions = {
   tooltip: 'Search Giphy!',
-  width: 420,
+  width: 428,
   height: 600,
   transparent: true,
   frame: false,
