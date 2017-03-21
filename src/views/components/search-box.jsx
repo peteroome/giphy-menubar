@@ -45,8 +45,9 @@ class SearchBox extends React.Component {
           this.setState({
             loadingFlag: true,
             offset: this.state.offset + 25,
+          }, () => {
+            this.fetchGifs();
           });
-          this.fetchGifs();
         }
       }
     }
