@@ -27,5 +27,8 @@ _Note: The Giphy API credentials could change at any moment. Fortunately [Giphy 
 ### Package the app
 `npm run package`
 
-#### Built by
+## Built by
 [Pete](http://www.peteroome.com/)
+
+## Thanks
+Many thanks to [@llnng](https://twitter.com/llnng) and [@robbarwell](https://twitter.com/robbarwell) for their design input and feedback on this project.
