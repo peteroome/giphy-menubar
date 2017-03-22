@@ -1,11 +1,15 @@
 import React from 'react';
 import jQuery from 'jquery';
-
+import Analytics from 'electron-google-analytics';
 import env from './../../env';
 import SearchForm from './search-form';
 import SearchResults from './search-results';
 
 const $ = jQuery;
+const analytics = new Analytics(env.ga_ua_id, {
+  userAgent: 'com.peteroome.gif-bar',
+  debug: env.ga_debug
+});
 
 class SearchBox extends React.Component {
   constructor(props) {
@@ -89,6 +93,13 @@ class SearchBox extends React.Component {
       }
       queryData = $.param(queryData);
       queryUrl = `${queryUrl}${queryPath}?${queryData}`;
+
+      // Analytics
+      analytics.pageview(
+        'http://gif-bar.peteroome.com',
+        `${queryPath}?${queryData}`,
+        `Search - ${this.state.searchTerm}`
+      );
 
       $.ajax({
         method: 'GET',

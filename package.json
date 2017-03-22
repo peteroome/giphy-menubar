@@ -4,6 +4,10 @@
   "description": "A minimal Giphy menubar app",
   "version": "0.0.5",
   "author": "Pete Roome <pete.roome@gmail.com> (http://peteroome.com/)",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/coolbox/giphy-menubar.git"
+  },
   "copyright": "© 2017, Pete Roome",
   "homepage": "http://peteroome.com",
   "license": "MIT",
@@ -21,6 +25,7 @@
     "react": "^15.3.1",
     "react-dom": "^15.0.1",
     "react-ga": "^2.1.2",
+    "electron-google-analytics": "0.0.16",
     "react-hotkeys": "^0.9.0",
     "react-masonry-component": "^4.2.1"
   },

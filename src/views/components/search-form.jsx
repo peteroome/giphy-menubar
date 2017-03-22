@@ -1,17 +1,15 @@
 import React from 'react';
 import { HotKeys } from 'react-hotkeys';
-import jQuery from 'jquery';
+import Analytics from 'electron-google-analytics';
 import env from './../../env';
 
-const $ = jQuery;
 const electron = window.require('electron');
 const remote = electron.remote;
 const clipboard = remote.clipboard;
-
-// Analytics
-const ReactGA = require('react-ga');
-
-ReactGA.initialize(env.ga_ua_id);
+const analytics = new Analytics(env.ga_ua_id, {
+  userAgent: 'com.peteroome.gif-bar',
+  debug: env.ga_debug
+});
 
 class SearchForm extends React.Component {
   constructor(props) {
@@ -48,10 +46,8 @@ class SearchForm extends React.Component {
     event.preventDefault();
     this.props.newSearch(this.search.value);
 
-    ReactGA.event({
-      category: 'Form',
-      action: 'Search',
-      label: this.search.value
+    analytics.event('Form', 'Search', {
+      evLabel: this.search.value
     });
   }
 

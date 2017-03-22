@@ -1,10 +1,11 @@
 import React from 'react';
+import Analytics from 'electron-google-analytics';
 import env from './../../env';
 
-// Analytics
-const ReactGA = require('react-ga');
-
-ReactGA.initialize(env.ga_ua_id);
+const analytics = new Analytics(env.ga_ua_id, {
+  userAgent: 'com.peteroome.gif-bar',
+  debug: env.ga_debug
+});
 
 const electron = window.require('electron');
 const remote = electron.remote;
@@ -44,10 +45,7 @@ class Gif extends React.Component {
       body: 'URL copied 🎉'
     });
 
-    ReactGA.event({
-      category: 'Gif',
-      action: 'Clicked',
-    });
+    analytics.event('Gif', 'clicked');
   }
 
   handleMouseOver(event) {
