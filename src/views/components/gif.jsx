@@ -30,6 +30,7 @@ class Gif extends React.Component {
   }
 
   handleClick(event) {
+    console.log("Hello world - click click");
     const sampleCues = [
       '#🔥download-gif-bar🔥->https://goo.gl/jOrQYi',
       '#🙌download-gif-bar-for-osx-👉👉👉-https://goo.gl/c9YLqx',
@@ -51,6 +52,7 @@ class Gif extends React.Component {
   }
 
   handleMouseOver(event) {
+    console.log("handleMouseOver");
     const img = event.currentTarget;
 
     if (!this.state.hd) {
@@ -62,6 +64,7 @@ class Gif extends React.Component {
   }
 
   handleMouseOut(event) {
+    console.log("handleMouseOut");
     const img = event.currentTarget;
 
     if (this.state.hd) {

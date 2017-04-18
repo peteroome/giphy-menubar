@@ -21,6 +21,22 @@
 	transform: translateY(200px);
 	animation: moveUp 0.25s ease forwards;
   margin-bottom: 8px;
+  box-sizing: border-box;
+}
+
+.gif-list li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-color: #f26a6e;
+}
+
+.gif-list li.active::after {
+  border: 4px solid #28d5c4;
+  transition: border-color 4s ease;
 }
 
 @-webkit-keyframes moveUp {

@@ -16,8 +16,9 @@ ReactGA.initialize(env.ga_ua_id);
 class SearchForm extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = { value: '' };
+    this.state = {
+      value: ''
+    };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -71,6 +72,7 @@ class SearchForm extends React.Component {
                 name="search"
                 placeholder="Search"
                 ref={(c) => { this.search = c; }}
+                onKeyDown={this.props.onKeyDown}
               />
               <button type="submit">
                 <img src="images/icons/ic_search_white_36px.svg" alt="Search" />
@@ -84,7 +86,8 @@ class SearchForm extends React.Component {
 }
 
 SearchForm.propTypes = {
-  newSearch: React.PropTypes.func
+  newSearch: React.PropTypes.func,
+  onKeyDown: React.PropTypes.func
 };
 
 export default SearchForm;

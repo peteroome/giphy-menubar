@@ -19,7 +19,11 @@ class SearchResults extends React.Component {
           options={masonryOptions}
         >
           {this.props.gifs.map((gif, index) => (
-            <SearchResultsLineItem key={index} gif={gif} />
+            <SearchResultsLineItem
+              key={index}
+              gif={gif}
+              className={`${this.props.cursor === index ? 'active' : ''}`}
+            />
           ))}
         </Masonry>
       </div>
@@ -28,7 +32,8 @@ class SearchResults extends React.Component {
 }
 
 SearchResults.propTypes = {
-  gifs: React.PropTypes.arrayOf(React.PropTypes.object)
+  gifs: React.PropTypes.arrayOf(React.PropTypes.object),
+  cursor: React.PropTypes.number
 };
 
 export default SearchResults;
