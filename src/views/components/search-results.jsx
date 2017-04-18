@@ -10,6 +10,13 @@ const masonryOptions = {
 };
 
 class SearchResults extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      result: []
+    };
+  }
+
   render() {
     return (
       <div className="gif-list-container">
@@ -32,8 +39,8 @@ class SearchResults extends React.Component {
 }
 
 SearchResults.propTypes = {
-  gifs: React.PropTypes.arrayOf(React.PropTypes.object),
-  cursor: React.PropTypes.number
+  cursor: React.PropTypes.number,
+  gifs: React.PropTypes.arrayOf(React.PropTypes.object)
 };
 
 export default SearchResults;

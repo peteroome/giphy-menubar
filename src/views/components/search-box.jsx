@@ -125,10 +125,12 @@ class SearchBox extends React.Component {
     const { cursor, gifs } = this.state;
     // arrow up/down button should select next/previous list element
     if (e.keyCode === 38 && cursor > 0) {
+      console.log('Key: Up');
       this.setState(prevState => ({
         cursor: prevState.cursor - 1
       }));
     } else if (e.keyCode === 40 && cursor < gifs.length - 1) {
+      console.log('Key: Down');
       this.setState(prevState => ({
         cursor: prevState.cursor + 1
       }));
@@ -145,7 +147,10 @@ class SearchBox extends React.Component {
           newSearch={this.newSearch}
           onKeyDown={this.handleKeyDown}
         />
-        <div className="search-results" onScroll={this.handleScroll}>
+        <div
+          className="search-results"
+          onScroll={this.handleScroll}
+        >
           <SearchResults
             gifs={this.state.gifs}
             cursor={this.state.cursor}
