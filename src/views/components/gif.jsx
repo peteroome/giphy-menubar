@@ -1,14 +1,15 @@
 import React from 'react';
 import env from './../../env';
+import { copyToClipboard } from './../../ext/controls';
+import {
+  shortcutsOnKeyUp,
+  shortcutsOnKeyDown
+} from './../../ext/keyboard-shortcuts';
 
 // Analytics
 const ReactGA = require('react-ga');
 
 ReactGA.initialize(env.ga_ua_id);
-
-const electron = window.require('electron');
-const remote = electron.remote;
-const clipboard = remote.clipboard;
 
 class Gif extends React.Component {
   constructor(props) {
@@ -29,30 +30,21 @@ class Gif extends React.Component {
     this.copyUrl = this.props.giphyObject.images.fixed_width.url;
   }
 
+  componentDidMount() {
+    document.addEventListener('keyup', shortcutsOnKeyUp);
+    document.addEventListener('keydown', shortcutsOnKeyDown);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keyup', shortcutsOnKeyUp);
+    document.removeEventListener('keydown', shortcutsOnKeyDown);
+  }
+
   handleClick(event) {
-    console.log("Hello world - click click");
-    const sampleCues = [
-      '#🔥download-gif-bar🔥->https://goo.gl/jOrQYi',
-      '#🙌download-gif-bar-for-osx-👉👉👉-https://goo.gl/c9YLqx',
-      '#👉👉👉-download-gif-bar-for-osx-👉👉👉-https://goo.gl/ppH2k1',
-    ];
-    const randCue = sampleCues[Math.floor(Math.random() * sampleCues.length)];
-
-    event.preventDefault();
-
-    clipboard.writeText(this.copyUrl + randCue);
-    new Notification('Giphy!', {
-      body: 'URL copied 🎉'
-    });
-
-    ReactGA.event({
-      category: 'Gif',
-      action: 'Clicked',
-    });
+    copyToClipboard(event, this.copyUrl);
   }
 
   handleMouseOver(event) {
-    console.log("handleMouseOver");
     const img = event.currentTarget;
 
     if (!this.state.hd) {
@@ -64,7 +56,6 @@ class Gif extends React.Component {
   }
 
   handleMouseOut(event) {
-    console.log("handleMouseOut");
     const img = event.currentTarget;
 
     if (this.state.hd) {

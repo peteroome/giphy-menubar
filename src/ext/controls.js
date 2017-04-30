@@ -2,8 +2,9 @@ const electron = window.require('electron');
 const remote = electron.remote;
 const clipboard = remote.clipboard;
 
-export default function (event) {
-  console.log(event);
+export function copyToClipboard (event, copyUrl) {
+  event.preventDefault();
+
   const sampleCues = [
     '#🔥download-gif-bar🔥->https://goo.gl/jOrQYi',
     '#🙌download-gif-bar-for-osx-👉👉👉-https://goo.gl/c9YLqx',
@@ -11,9 +12,7 @@ export default function (event) {
   ];
   const randCue = sampleCues[Math.floor(Math.random() * sampleCues.length)];
 
-  event.preventDefault();
-
-  clipboard.writeText(this.copyUrl + randCue);
+  clipboard.writeText(copyUrl + randCue);
   new Notification('Giphy!', {
     body: 'URL copied 🎉'
   });

@@ -110,7 +110,7 @@ class SearchBox extends React.Component {
             gifs: gifsArray,
             loadingFlag: false,
             lastResultsCount: gifs.data.length,
-            cursor: 0
+            cursor: -1
           });
         }
       });
@@ -121,22 +121,17 @@ class SearchBox extends React.Component {
     this.setState({ searchTerm: '' });
   }
 
-  handleKeyDown(e) {
+  handleKeyDown(event) {
     const { cursor, gifs } = this.state;
     // arrow up/down button should select next/previous list element
-    if (e.keyCode === 38 && cursor > 0) {
-      console.log('Key: Up');
+    if (event.keyCode === 38 && cursor > 0) {
       this.setState(prevState => ({
         cursor: prevState.cursor - 1
       }));
-    } else if (e.keyCode === 40 && cursor < gifs.length - 1) {
-      console.log('Key: Down');
+    } else if (event.keyCode === 40 && cursor < gifs.length - 1) {
       this.setState(prevState => ({
         cursor: prevState.cursor + 1
       }));
-    } else if (e.keyCode === 13 && this.state.cusor >= 0) {
-      // Key: Enter
-      // Copy gif URL
     }
   }
 
